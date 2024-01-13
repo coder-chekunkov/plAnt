@@ -14,4 +14,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "plAnt"
-include(":app")
+include(":plAnt-Mobile")
