@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "plAnt"
 include(":plAnt-Mobile")
+include(":CoreComposeDesignSystemLib")
