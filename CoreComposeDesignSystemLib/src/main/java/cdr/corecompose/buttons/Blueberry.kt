@@ -14,12 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
-import cdr.corecompose.theming.BlackAlpha
-import cdr.corecompose.theming.ElectricBlue0
-import cdr.corecompose.theming.Gray
-import cdr.corecompose.theming.Orange
-import cdr.corecompose.theming.Transparent
-import cdr.corecompose.theming.White
+import cdr.corecompose.theming.getThemedColor
+import cdr.corecompose.theming.PlAntTokens
 
 
 /**
@@ -71,11 +67,11 @@ private fun StandardBlueberry(
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = ElectricBlue0,
-            disabledContainerColor = Gray
+            containerColor = PlAntTokens.ButtonBrand.getThemedColor(),
+            disabledContainerColor = PlAntTokens.ButtonDisabled.getThemedColor()
         ),
-        textColor = White,
-        disabledTextColor = BlackAlpha
+        textColor = PlAntTokens.TextButtonWhite.getThemedColor(),
+        disabledTextColor = PlAntTokens.TextButtonDisabled.getThemedColor()
     )
 }
 
@@ -104,11 +100,11 @@ private fun TransparentBlueberry(
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Transparent,
-            disabledContainerColor = Transparent
+            containerColor = PlAntTokens.Transparent.getThemedColor(),
+            disabledContainerColor = PlAntTokens.Transparent.getThemedColor()
         ),
-        textColor = ElectricBlue0,
-        disabledTextColor = ElectricBlue0
+        textColor = PlAntTokens.TextBrand.getThemedColor(),
+        disabledTextColor = PlAntTokens.TextButtonDisabled.getThemedColor()
     )
 }
 
@@ -137,11 +133,11 @@ private fun NegativeBlueberry(
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Orange,
-            disabledContainerColor = Gray
+            containerColor = PlAntTokens.ButtonWarning.getThemedColor(),
+            disabledContainerColor = PlAntTokens.ButtonDisabled.getThemedColor()
         ),
-        textColor = White,
-        disabledTextColor = BlackAlpha
+        textColor = PlAntTokens.TextButtonWhite.getThemedColor(),
+        disabledTextColor = PlAntTokens.TextButtonDisabled.getThemedColor()
     )
 }
 
