@@ -18,6 +18,7 @@ enum class PlAntTokens {
     ButtonDisabled,
     ButtonWarning,
     ButtonTransparent,
+    Brand,
     TextPrimary,
     TextSecondary,
     TextBrand,

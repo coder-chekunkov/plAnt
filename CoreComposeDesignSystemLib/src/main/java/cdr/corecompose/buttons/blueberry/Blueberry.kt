@@ -1,4 +1,4 @@
-package cdr.corecompose.buttons
+package cdr.corecompose.buttons.blueberry
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +14,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import cdr.corecompose.theming.getThemedColor
 import cdr.corecompose.theming.PlAntTokens
 
@@ -43,6 +44,34 @@ fun Blueberry(
 }
 
 /**
+ * Основная кнопка - "Голубика"
+ *
+ * @param text текст на кнопке
+ * @param style стиль кнопки [BlueberryStyle]
+ * @param onClick действие по нажатию
+ * @param modifier Modifier
+ * @param isEnabled true - enable, false - disable
+ * @param horizontalPadding горизонтальные отступы
+ * @param verticalPadding вертикальные отступы
+ *
+ * @author Alexandr Chekunkov
+ */
+@Composable
+fun Blueberry(
+    text: String,
+    style: BlueberryStyle,
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    isEnabled: Boolean = true,
+    horizontalPadding: Dp = 16.dp,
+    verticalPadding: Dp = 16.dp
+) = when (style) {
+    BlueberryStyle.Standard -> StandardBlueberry(text, onClick, modifier, isEnabled, horizontalPadding, verticalPadding)
+    BlueberryStyle.Transparent -> TransparentBlueberry(text, onClick, modifier, isEnabled, horizontalPadding, verticalPadding)
+    BlueberryStyle.Negative -> NegativeBlueberry(text, onClick, modifier, isEnabled, horizontalPadding, verticalPadding)
+}
+
+/**
  * Стандартная кнопка - "Голубика"
  *
  * @param text текст на кнопке
@@ -57,13 +86,15 @@ private fun StandardBlueberry(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isEnabled: Boolean = true
+    isEnabled: Boolean = true,
+    horizontalPadding: Dp = 16.dp,
+    verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
         text = text,
         onClick = onClick,
         modifier = modifier
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
@@ -90,13 +121,15 @@ private fun TransparentBlueberry(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isEnabled: Boolean = true
+    isEnabled: Boolean = true,
+    horizontalPadding: Dp = 16.dp,
+    verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
         text = text,
         onClick = onClick,
         modifier = modifier
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
@@ -123,13 +156,15 @@ private fun NegativeBlueberry(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isEnabled: Boolean = true
+    isEnabled: Boolean = true,
+    horizontalPadding: Dp = 16.dp,
+    verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
         text = text,
         onClick = onClick,
         modifier = modifier
-            .padding(horizontal = 16.dp, vertical = 16.dp)
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding)
             .then(BlueberryModifier),
         isEnabled = isEnabled,
         colors = ButtonDefaults.buttonColors(
