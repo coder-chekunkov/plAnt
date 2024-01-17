@@ -1,13 +1,14 @@
-package cdr.corecompose.buttons
+package cdr.corecompose.buttons.blueberry
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import cdr.corecompose.theming.getThemedColor
-import cdr.corecompose.theming.PlAntTheme
 import cdr.corecompose.theming.PlAntTokens
+import cdr.corecompose.theming.PreviewPlantTheme
 
 /**
  * Превью для всех доступных кнопок (светлая тема)
@@ -16,10 +17,12 @@ import cdr.corecompose.theming.PlAntTokens
  */
 @Preview
 @Composable
-fun BlueberryPreviewLightTheme() {
-    PlAntTheme(darkTheme = false) {
+internal fun BlueberryPreviewLightTheme() {
+    PreviewPlantTheme(darkTheme = false) {
         Column(
-            modifier = Modifier.background(PlAntTokens.Background0.getThemedColor())
+            modifier = Modifier
+                .fillMaxSize()
+                .background(PlAntTokens.Background1.getThemedColor())
         ) {
             Blueberry(text = "Подтвердить", style = BlueberryStyle.Standard, onClick = {})
             Blueberry(text = "Подтвердить", style = BlueberryStyle.Standard, onClick = {}, isEnabled = false)
@@ -38,10 +41,12 @@ fun BlueberryPreviewLightTheme() {
  */
 @Preview
 @Composable
-fun BlueberryPreviewDarkTheme() {
-    PlAntTheme(darkTheme = true) {
+internal fun BlueberryPreviewDarkTheme() {
+    PreviewPlantTheme(darkTheme = true) {
         Column(
-            modifier = Modifier.background(PlAntTokens.Background0.getThemedColor())
+            modifier = Modifier
+                .fillMaxSize()
+                .background(PlAntTokens.Background1.getThemedColor())
         ) {
             Blueberry(text = "Подтвердить", style = BlueberryStyle.Standard, onClick = {})
             Blueberry(text = "Подтвердить", style = BlueberryStyle.Standard, onClick = {}, isEnabled = false)

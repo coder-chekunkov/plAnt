@@ -9,8 +9,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import cdr.corecompose.theming.getThemedColor
-import cdr.corecompose.theming.PlAntTheme
 import cdr.corecompose.theming.PlAntTokens
+import cdr.corecompose.theming.PreviewPlantTheme
 
 /**
  * Превью для всех доступных текстов (светлая тема)
@@ -19,8 +19,8 @@ import cdr.corecompose.theming.PlAntTokens
  */
 @Preview
 @Composable
-fun TextStylesPreviewLightTheme() {
-    PlAntTheme(darkTheme = false) {
+internal fun TextStylesPreviewLightTheme() {
+    PreviewPlantTheme(darkTheme = false) {
         Column(modifier = Modifier.background(PlAntTokens.Background0.getThemedColor())) {
             Row {
                 Column(
@@ -88,9 +88,9 @@ fun TextStylesPreviewLightTheme() {
  */
 @Preview
 @Composable
-fun TextStylesPreviewDarkTheme() {
-    PlAntTheme(darkTheme = true) {
-        Column(modifier = Modifier.background(PlAntTokens.Background0.getThemedColor())) {
+internal fun TextStylesPreviewDarkTheme() {
+    PreviewPlantTheme(darkTheme = true) {
+        Column(modifier = Modifier.background(PlAntTokens.Background1.getThemedColor())) {
             Row {
                 Column(
                     modifier = Modifier.padding(16.dp)
