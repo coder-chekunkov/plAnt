@@ -33,7 +33,7 @@ enum class PlAntTokens {
  */
 @Composable
 @ReadOnlyComposable
-internal fun PlAntTokens.getThemedColor(): Color = PlAntTheme.tokens.getValue(this)
+fun PlAntTokens.getThemedColor(): Color = PlAntTheme.tokens.getValue(this)
 
 /**
  * Токены цветов
