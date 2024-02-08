@@ -10,13 +10,12 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cdr.corecompose.buttons.dual.horizontal.DualBlueberryHorizontal
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cdr.corecompose.buttons.blueberry.Blueberry
+import cdr.corecompose.buttons.blueberry.BlueberryStyle
 import cdr.corecompose.text.Body1
 import cdr.corecompose.text.Title2
 import cdr.corecompose.theming.PlAntTheme
@@ -40,7 +39,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 private fun MainContent() {
-    var counter by remember { mutableStateOf(0) }
+    val viewModel = MainViewModel()
+    val data by viewModel.data.collectAsStateWithLifecycle()
 
     PlAntTheme {
         Column(
@@ -51,23 +51,31 @@ private fun MainContent() {
         ) {
             Title2(
                 text = "Тестовый экран",
-                modifier = Modifier.fillMaxWidth(),
-                textAlign = TextAlign.Center
+                modifier = Modifier.fillMaxWidth()
             )
 
             Body1(
-                text = "Счётчик: $counter",
+                text = "Получение тестовых данных",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = 16.dp),
                 textAlign = TextAlign.Center
             )
 
-            DualBlueberryHorizontal(
-                firstButtonText = "Минус",
-                secondButtonText = "Плюс",
-                firstButtonClick = { counter -= 1 },
-                secondButtonClick = { counter += 1 })
+            Blueberry(
+                text = "Получить",
+                style = BlueberryStyle.Standard,
+                onClick = { viewModel.fetchData() }
+            )
+
+            Body1(
+                text = data,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 16.dp),
+                textAlign = TextAlign.Center
+            )
+
         }
     }
 }
