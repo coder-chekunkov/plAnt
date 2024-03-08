@@ -79,9 +79,7 @@ private fun MainContent() {
                 textAlign = TextAlign.Center
             )
 
-            if (data.isNotBlank()) {
-                Divider()
-            }
+            if (data.isNotBlank()) Divider()
 
         }
     }
