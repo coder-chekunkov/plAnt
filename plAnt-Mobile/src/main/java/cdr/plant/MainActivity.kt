@@ -75,9 +75,11 @@ private fun MainContent() {
                 text = data,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 16.dp),
+                    .padding(vertical = 16.dp),
                 textAlign = TextAlign.Center
             )
+
+            if (data.isNotBlank()) Divider()
 
         }
     }
