@@ -1,4 +1,4 @@
-package cdr.plant.data
+package cdr.plant.models.data
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
@@ -15,9 +15,9 @@ import kotlinx.parcelize.Parcelize
  * @author Alexandr Chekunkov
  */
 @Parcelize
-data class TestData(
+internal data class TestDataRequest(
     @SerializedName("name") var name: String? = null,
     @SerializedName("team") var team: String? = null,
     @SerializedName("createdby") var createdby: String? = null,
-    @SerializedName("imageurl") var imageurl: String? = null,
+    @SerializedName("imageurl") var imageurl: String? = null
 ) : Parcelable

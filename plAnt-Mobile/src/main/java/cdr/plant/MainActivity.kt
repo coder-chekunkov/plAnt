@@ -4,24 +4,32 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import cdr.corecompose.buttons.blueberry.Blueberry
 import cdr.corecompose.buttons.blueberry.BlueberryStyle
-import cdr.corecompose.text.Body1
-import cdr.corecompose.text.Title2
+import cdr.corecompose.progressbar.ProgressBarCircle
+import cdr.corecompose.text.Body1Secondary
+import cdr.corecompose.text.Headline3
+import cdr.corecompose.text.Title2Warning
 import cdr.corecompose.theming.PlAntTheme
 import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.getThemedColor
+import cdr.plant.models.domain.TestData
+import cdr.plant.models.presentation.MainScreenState
 
 /**
  * Тестовый экран
@@ -32,55 +40,112 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val viewModel = MainViewModel()
+
         setContent {
-            MainContent()
+            PlAntTheme {
+                MainContent(viewModel)
+            }
         }
     }
 }
 
 @Composable
-private fun MainContent() {
-    val viewModel = MainViewModel()
-    val data by viewModel.data.collectAsStateWithLifecycle()
+private fun MainContent(viewModel: MainViewModel) {
+    val state by viewModel.data.collectAsStateWithLifecycle()
 
-    PlAntTheme {
+    LaunchedEffect(Unit) { viewModel.fetchData() }
+
+    when (val currentState = state) {
+        is MainScreenState.Success -> SuccessfulContent(viewModel, currentState.data)
+        MainScreenState.Loading -> LoadingShimmer()
+        MainScreenState.EmptyScreen -> EmptyScreen(viewModel)
+    }
+}
+
+@Composable
+private fun SuccessfulContent(
+    viewModel: MainViewModel,
+    data: TestData
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(PlAntTokens.Background1.getThemedColor())
+    ) {
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(PlAntTokens.Background1.getThemedColor())
                 .padding(16.dp)
+                .weight(1f)
         ) {
-            Title2(
-                text = "Тестовый экран",
-                modifier = Modifier.fillMaxWidth()
-            )
-
-            Body1(
-                text = "Получение тестовых данных",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 16.dp),
+            Headline3(
+                text = data.name,
+                modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
 
-            Blueberry(
-                text = "Получить",
-                style = BlueberryStyle.Standard,
-                onClick = { viewModel.fetchData() }
-            )
+            Divider(modifier = Modifier.padding(vertical = 8.dp))
 
-            Divider()
-
-            Body1(
-                text = data,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 16.dp),
-                textAlign = TextAlign.Center
-            )
-
-            if (data.isNotBlank()) Divider()
-
+            Body1Secondary(text = "Команда создателей: ${data.team}")
+            Body1Secondary(text = "Дата создания: ${data.createdby}")
+            Body1Secondary(text = "Ссылка на постер: ${data.imageurl}")
         }
+
+        Box(
+            modifier = Modifier.background(PlAntTokens.Background1.getThemedColor())
+        ) {
+            Blueberry(
+                text = "Получить следующий вопрос",
+                style = BlueberryStyle.Standard,
+                onClick = { viewModel.getQuestion() })
+        }
+    }
+}
+
+@Composable
+private fun EmptyScreen(viewModel: MainViewModel) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(PlAntTokens.Background1.getThemedColor())
+    ) {
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .weight(1f),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Title2Warning(
+                text = "Список закончился",
+                textAlign = TextAlign.Center
+            )
+
+            Body1Secondary(
+                text = "Для продолжения работы - загрузите новые данные",
+                textAlign = TextAlign.Center
+            )
+        }
+
+        Box(
+            modifier = Modifier.background(PlAntTokens.Background1.getThemedColor())
+        ) {
+            Blueberry(
+                text = "Загрузить данные еще раз",
+                style = BlueberryStyle.Standard,
+                onClick = { viewModel.fetchData() })
+        }
+    }
+}
+
+@Composable
+private fun LoadingShimmer() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(PlAntTokens.Background1.getThemedColor()),
+        contentAlignment = Alignment.Center
+    ) {
+        ProgressBarCircle(text = "Загрузка тестовых данных")
     }
 }

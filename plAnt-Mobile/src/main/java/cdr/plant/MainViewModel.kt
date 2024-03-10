@@ -3,27 +3,52 @@ package cdr.plant
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import cdr.coreserver.BaseRestClientImpl
-import cdr.plant.mapper.TestDataMapperImpl
+import cdr.plant.domain.interactor.TestDataInteractorImpl
+import cdr.plant.domain.mapper.TestDataMapperImpl
+import cdr.plant.domain.repository.TestDataRepositoryImpl
+import cdr.plant.models.domain.TestData
+import cdr.plant.models.presentation.MainScreenState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+/**
+ * ViewModel для главного экрана
+ *
+ * @author Alexandr Chekunkov
+ */
+internal class MainViewModel : ViewModel() {
 
-    val data: StateFlow<String> get() = _data.asStateFlow()
-    private val _data = MutableStateFlow("")
+    val data: StateFlow<MainScreenState>  get() = _data.asStateFlow()
+    private val _data = MutableStateFlow<MainScreenState>(MainScreenState.Loading)
+
+    private var currentNumber = 0
+    private var testDataList = listOf<TestData>()
 
     private val baseRestClient = BaseRestClientImpl()
-    private val testDataMapper = TestDataMapperImpl(
-        baseRestClient.baseRestClient()
-    )
+    private val testDataMapper = TestDataMapperImpl(baseRestClient.baseRestClient())
+    private val testDataRepository = TestDataRepositoryImpl(testDataMapper)
+    private val testDataInteractor = TestDataInteractorImpl(testDataRepository)
 
     fun fetchData() {
         viewModelScope.launch {
-            val testData = testDataMapper.getTestData()
+            _data.value = MainScreenState.Loading
+            testDataList = testDataInteractor.getTestData()
+            currentNumber = 0
 
-            _data.value = testData.toString()
+            delay(3000) // Задержка 3 сек.
+            getQuestion()
         }
+    }
+
+    fun getQuestion() {
+        _data.value = if (currentNumber < testDataList.size) {
+            MainScreenState.Success(testDataList[currentNumber])
+        } else {
+            MainScreenState.EmptyScreen
+        }
+        currentNumber += 1
     }
 }
