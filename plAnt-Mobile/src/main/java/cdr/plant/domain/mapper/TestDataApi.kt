@@ -1,6 +1,6 @@
-package cdr.plant.mapper
+package cdr.plant.domain.mapper
 
-import cdr.plant.data.TestData
+import cdr.plant.models.data.TestDataRequest
 import retrofit2.http.GET
 
 /**
@@ -11,5 +11,5 @@ import retrofit2.http.GET
 internal interface TestDataApi {
 
     @GET("marvel")
-    suspend fun getMovieList(): List<TestData>
+    suspend fun getMovieList(): List<TestDataRequest>
 }
