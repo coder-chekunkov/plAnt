@@ -15,8 +15,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "plAnt"
 include(":plAnt-Mobile")
-include(":CoreComposeDesignSystemLib")
-include(":CoreLogsLib")
-include(":CoreLogsLib")
-include(":CoreNavigationLib")
-include(":CoreServerRestLib")
+include(":Core:CoreComposeDesignSystemLib")
+include(":Core:CoreLogsLib")
+include(":Core:CoreLogsLib")
+include(":Core:CoreNavigationLib")
+include(":Core:CoreServerRestLib")

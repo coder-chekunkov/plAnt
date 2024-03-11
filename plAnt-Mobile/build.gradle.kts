@@ -57,9 +57,9 @@ android {
 }
 
 dependencies {
-    implementation(project(":CoreComposeDesignSystemLib"))
-    implementation(project(":CoreNavigationLib"))
-    implementation(project(":CoreServerRestLib"))
+    implementation(project(":Core:CoreComposeDesignSystemLib"))
+    implementation(project(":Core:CoreNavigationLib"))
+    implementation(project(":Core:CoreServerRestLib"))
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
