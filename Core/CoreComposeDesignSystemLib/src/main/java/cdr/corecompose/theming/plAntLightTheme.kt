@@ -22,5 +22,14 @@ internal fun lightTheme(): Map<PlAntTokens, Color> = mapOf(
     PlAntTokens.TextButtonWhite to White,
     PlAntTokens.TextBrand to ElectricBlue,
     PlAntTokens.TextWarning to Orange,
-    PlAntTokens.Transparent to Transparent
+    PlAntTokens.Transparent to Transparent,
+    PlAntTokens.TextFieldBackground to Gray1,
+    PlAntTokens.TextFieldText to Black,
+    PlAntTokens.TextFieldUnfocusedText to Graphite0,
+    PlAntTokens.TextFieldUnfocusedLabel to Graphite0,
+    PlAntTokens.TextFieldWarningBackground to Orange1,
+    PlAntTokens.TextFieldWarningText to Orange,
+    PlAntTokens.TextFieldWarningUnfocusedText to Orange,
+    PlAntTokens.TextFieldWarningUnfocusedLabel to Orange,
+    PlAntTokens.Warning to Orange
 )

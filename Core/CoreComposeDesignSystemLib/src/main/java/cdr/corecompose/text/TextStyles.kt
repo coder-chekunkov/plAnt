@@ -249,8 +249,8 @@ fun Body3(
     textAlign = textAlign,
     style = TextStyle(
         color = PlAntTokens.TextPrimary.getThemedColor(),
-        fontSize = 15.sp,
-        lineHeight = 20.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.em
     ),
     overflow = TextOverflow.Ellipsis
@@ -493,8 +493,8 @@ fun Body3Secondary(
     textAlign = textAlign,
     style = TextStyle(
         color = PlAntTokens.TextSecondary.getThemedColor(),
-        fontSize = 15.sp,
-        lineHeight = 20.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.em
     ),
     overflow = TextOverflow.Ellipsis
@@ -739,8 +739,8 @@ fun Body3Brand(
     textAlign = textAlign,
     style = TextStyle(
         color = PlAntTokens.TextBrand.getThemedColor(),
-        fontSize = 15.sp,
-        lineHeight = 20.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.em
     ),
     overflow = TextOverflow.Ellipsis
@@ -984,8 +984,8 @@ fun Body3Warning(
     textAlign = textAlign,
     style = TextStyle(
         color = PlAntTokens.TextWarning.getThemedColor(),
-        fontSize = 15.sp,
-        lineHeight = 20.sp,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
         letterSpacing = 0.em
     ),
     overflow = TextOverflow.Ellipsis

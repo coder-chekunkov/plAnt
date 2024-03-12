@@ -10,7 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import cdr.corecompose.text.Body3
+import cdr.corecompose.text.Body1
 import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.getThemedColor
 
@@ -38,7 +38,7 @@ fun ProgressBarCircle(
         )
 
         if (text != null) {
-            Body3(
+            Body1(
                 modifier = Modifier.padding(top = 32.dp),
                 text = text,
                 maxLines = 2,
