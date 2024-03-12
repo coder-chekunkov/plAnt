@@ -26,7 +26,16 @@ enum class PlAntTokens {
     TextWarning,
     TextButtonDisabled,
     TextButtonWhite,
-    Transparent
+    Transparent,
+    TextFieldBackground,
+    TextFieldText,
+    TextFieldUnfocusedText,
+    TextFieldUnfocusedLabel,
+    TextFieldWarningBackground,
+    TextFieldWarningText,
+    TextFieldWarningUnfocusedText,
+    TextFieldWarningUnfocusedLabel,
+    Warning
 }
 
 /**

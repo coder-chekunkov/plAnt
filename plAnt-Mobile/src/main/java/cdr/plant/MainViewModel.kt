@@ -22,7 +22,7 @@ import kotlinx.coroutines.launch
 internal class MainViewModel : ViewModel() {
 
     val data: StateFlow<MainScreenState>  get() = _data.asStateFlow()
-    private val _data = MutableStateFlow<MainScreenState>(MainScreenState.Loading)
+    private val _data = MutableStateFlow<MainScreenState>(MainScreenState.EmptyScreen)
 
     private var currentNumber = 0
     private var testDataList = listOf<TestData>()
