@@ -17,6 +17,7 @@ import cdr.corecompose.buttons.blueberry.BlueberryStyle
  * @param secondButtonText текст второй кнопки
  * @param firstButtonClick действие по нажатию первой кнопки
  * @param secondButtonClick действие по нажатию второй кнопки
+ * @param firstButtonStyle стиль первой кнопки (дефолт - стандартный)
  * @param secondButtonStyle стиль второй кнопки (дефолт - прозрачный)
  *
  * @author Alexandr Chekunkov
@@ -28,6 +29,7 @@ fun DualBlueberryVertical(
     secondButtonText: String,
     firstButtonClick: () -> Unit,
     secondButtonClick: () -> Unit,
+    firstButtonStyle: BlueberryStyle = BlueberryStyle.Standard,
     secondButtonStyle: BlueberryStyle = BlueberryStyle.Transparent
 ) {
     Column(
@@ -36,7 +38,7 @@ fun DualBlueberryVertical(
     ) {
         Blueberry(
             text = firstButtonText,
-            style = BlueberryStyle.Standard,
+            style = firstButtonStyle,
             onClick = firstButtonClick,
             verticalPadding = 0.dp
         )

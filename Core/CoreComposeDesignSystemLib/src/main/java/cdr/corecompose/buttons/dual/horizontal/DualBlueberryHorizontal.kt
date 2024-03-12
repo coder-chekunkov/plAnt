@@ -22,6 +22,7 @@ import cdr.corecompose.buttons.blueberry.BlueberryStyle
  * @param firstButtonClick действие по нажатию первой кнопки
  * @param secondButtonClick действие по нажатию второй кнопки
  * @param firstButtonStyle стиль первой кнопки (дефолт - прозрачный)
+ * @param secondButtonStyle стиль второй кнопки (дефолт - стандартный)
  *
  * @author Alexandr Chekunkov
  */
@@ -32,7 +33,8 @@ fun DualBlueberryHorizontal(
     secondButtonText: String,
     firstButtonClick: () -> Unit,
     secondButtonClick: () -> Unit,
-    firstButtonStyle: BlueberryStyle = BlueberryStyle.Negative
+    firstButtonStyle: BlueberryStyle = BlueberryStyle.Negative,
+    secondButtonStyle: BlueberryStyle = BlueberryStyle.Standard,
 ) {
     Row(
         modifier = modifier
@@ -52,7 +54,7 @@ fun DualBlueberryHorizontal(
         Blueberry(
             modifier = Modifier.weight(1f),
             text = secondButtonText,
-            style = BlueberryStyle.Standard,
+            style = secondButtonStyle,
             onClick = secondButtonClick,
             horizontalPadding = 0.dp
         )
