@@ -10,15 +10,21 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import cdr.corecompose.alert.AlertDialog
+import cdr.corecompose.alert.AlertDialogData
 import cdr.corecompose.buttons.blueberry.Blueberry
 import cdr.corecompose.buttons.blueberry.BlueberryStyle
 import cdr.corecompose.progressbar.ProgressBarCircle
@@ -84,7 +90,7 @@ private fun SuccessfulContent(
                 textAlign = TextAlign.Center
             )
 
-            Divider(modifier = Modifier.padding(vertical = 8.dp))
+            HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
 
             Body1Secondary(text = "Команда создателей: ${data.team}")
             Body1Secondary(text = "Дата создания: ${data.createdby}")
@@ -104,6 +110,8 @@ private fun SuccessfulContent(
 
 @Composable
 private fun EmptyScreen(viewModel: MainViewModel) {
+    var isShowAlert by remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -131,10 +139,24 @@ private fun EmptyScreen(viewModel: MainViewModel) {
             modifier = Modifier.background(PlAntTokens.Background1.getThemedColor())
         ) {
             Blueberry(
-                text = "Загрузить данные еще раз",
-                style = BlueberryStyle.Standard,
-                onClick = { viewModel.fetchData() })
+                text = "Информация",
+                style = BlueberryStyle.Negative,
+                onClick = { isShowAlert = true })
         }
+    }
+
+    if (isShowAlert) {
+        AlertDialog(
+            data = AlertDialogData(
+                title = "Нет данных",
+                subtitle = "Загрузите новые данные",
+                image = cdr.coreresourceslib.R.drawable.illustration_256_empty,
+                firstButtonText = "Загрузить",
+                properties = DialogProperties(dismissOnClickOutside = false)
+            ),
+            onDismissClick = { isShowAlert = false },
+            onFirstButtonClick = { viewModel.fetchData() }
+        )
     }
 }
 

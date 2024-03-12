@@ -15,6 +15,7 @@ internal fun darkTheme(): Map<PlAntTokens, Color> = mapOf(
     PlAntTokens.ButtonWarning to Orange,
     PlAntTokens.ButtonTransparent to Transparent,
     PlAntTokens.Brand to ElectricBlue,
+    PlAntTokens.IconSecondary to White1,
     PlAntTokens.TextPrimary to White,
     PlAntTokens.TextSecondary to White1,
     PlAntTokens.TextButtonDisabled to Graphite0,
