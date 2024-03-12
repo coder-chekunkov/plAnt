@@ -8,12 +8,14 @@
 
 - Theme (Preview + Main)
 - TextStyles
+- TextFieldCard
 - Buttons
     - Blueberry
     - DualBlueberryHorizontal
     - DualBlueberryVertical
 - Progress
     - ProgressCircle
+- AlertDialog
 
 ---
 
@@ -24,26 +26,36 @@
 Также появилась необходимость реализовать preview-тему, которая бы использовалась для предпоказа элемента (используется только для разработки).
 
 **TextStyles** <br/>
-Для отображения пользователю какой-либо информации - используются текстовые поля. Модуль дизайн системы поддерживает разные типы текста, которые могут сообщать критическую информацию, быть заголовками и т.д. Названия и внешний вид каждого из текста изображен на рисунке ниже в двух темах (светлая и темная). 
+Для отображения пользователю какой-либо информации используются текстовые поля. Модуль дизайн системы поддерживает разные типы текста, которые могут сообщать критическую информацию, быть заголовками и т.д. Названия и внешний вид каждого из текста изображен на рисунке ниже в двух темах (светлая и темная). 
 
-<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/CoreComposeDesignSystemLib/examples/text_styles_preview.png" alt="TextStyles" width="500"/>
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/text_styles_preview.png" alt="TextStyles" width="500"/>
+
+**TextFieldCard** <br/>
+Для ввода какого-либо текста используются поля ввода. Модуль дизайн системы поддерживает два типа полей ввода: стандартный и предупреждающий. Каждое поле ввода может быть настроенно - видимость подзаголовка, максимальное количество строк, тип клавиатуры и т.д. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
+
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/text_field_card_preview.png" alt="TextFieldCard" width="500"/>
 
 **Blueberry** <br/>
 Blueberry - это нестандартное название кнопок, которые помогают взаимодействовать с пользователем. Имеется четыре доступных темы: стандарт, предупреждение, текст-кнопка и отключенное состояние. Все типы изображены на рисунке ниже в двух темах (светлая и темная).
 
-<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/CoreComposeDesignSystemLib/examples/blueberry_preview.png" alt="Blueberry" width="500"/>
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/blueberry_preview.png" alt="Blueberry" width="500"/>
 
 **DualBlueberryHorizontal** <br/>
 DualBlueberryHorizontal - это набор двух кнопок Blueberry, которые расположены горизонтально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
 
-<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/CoreComposeDesignSystemLib/examples/dual_blueberry_horizontal_preview.png" alt="DualBlueberryHorizontal" width="500"/>
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/dual_blueberry_horizontal_preview.png" alt="DualBlueberryHorizontal" width="500"/>
 
 **DualBlueberryVertical** <br/>
 DualBlueberryHorizontal - это набор двух кнопок Blueberry, которые расположены вертикально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
 
-<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/CoreComposeDesignSystemLib/examples/dual_blueberry_vertical_preview.png" alt="DualBlueberryVertical" width="500"/>
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/dual_blueberry_vertical_preview.png" alt="DualBlueberryVertical" width="500"/>
 
 **ProgressCircle** <br/>
 ProgressCircle - это доработанный ProgressBar, который вращается бесконечно. Следует использовать для загрузки каких-либо элементов или отображение статического состояния. Есть возможность добавить текст пояснения. Пример изображен на gif ниже только в темной теме.
 
-<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/CoreComposeDesignSystemLib/examples/progress_bar_circle_preview.gif" alt="ProgressCircle" width="250"/>
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/progress_bar_circle_preview.gif" alt="ProgressCircle" width="250"/>
+
+**AlertDialog** <br/>
+AlertDialog - это кастомный всплывающee окно, которое используются для отображения важных сообщений или запросов пользователю. Каждый AlertDialog состоит из заголовка, подзаголовка, одной или двух кнопок действия (определяется при создании), изображения и кнопки закрытия. Пример изображен ниже только в светлой теме.
+
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/alert_dialog_preview.png" alt="AlertDialog" width="250"/>
