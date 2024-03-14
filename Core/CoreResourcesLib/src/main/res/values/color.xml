@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- light theme colors region -->
+    <color name="background_0_light">#FFFFFFFF</color>
+    <color name="background_1_light">#FFFFFFFF</color>
+    <!-- end region -->
+
+    <!-- dark theme colors region -->
+    <color name="background_0_dark">#FF121212</color>
+    <color name="background_1_dark">#FF1E1E1E</color>
+    <!-- end region -->
+
+</resources>
