@@ -44,11 +44,9 @@ internal fun TextFieldCardPreviewLightTheme() {
                 label = "Введите комментарий",
                 text = text1,
                 onTextChange = { newText ->
-                    subtitle1 = if (newText.text.length < 100) {
+                    subtitle1 = newText.text.length >= 100
+                    if (newText.text.length <= 100) {
                         text1 = newText
-                        false
-                    } else {
-                        true
                     }
                 },
                 maxLines = 3,

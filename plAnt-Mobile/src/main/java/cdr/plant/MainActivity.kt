@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
@@ -82,7 +83,7 @@ private fun SuccessfulContent(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PlAntTokens.Background1.getThemedColor())
+            .background(PlAntTokens.Background0.getThemedColor())
     ) {
         Column(
             modifier = Modifier
@@ -103,7 +104,7 @@ private fun SuccessfulContent(
         }
 
         Box(
-            modifier = Modifier.background(PlAntTokens.Background1.getThemedColor())
+            modifier = Modifier.background(PlAntTokens.Background0.getThemedColor())
         ) {
             Blueberry(
                 text = "Получить следующий вопрос",
@@ -127,7 +128,7 @@ private fun EmptyScreen(viewModel: MainViewModel) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(PlAntTokens.Background1.getThemedColor())
+            .background(PlAntTokens.Background0.getThemedColor())
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.Bottom
     ) {
@@ -135,7 +136,7 @@ private fun EmptyScreen(viewModel: MainViewModel) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 54.dp, horizontal = 16.dp)
-                .background(PlAntTokens.Background1.getThemedColor())
+                .background(PlAntTokens.Background0.getThemedColor())
                 .weight(1f)
         ) {
             Title2(
@@ -156,33 +157,25 @@ private fun EmptyScreen(viewModel: MainViewModel) {
                 text = login,
                 label = "Логин",
                 onTextChange = { newText ->
+                    loginSubtitleVisibility = newText.text.length >= 15
+                    if (newText.text.length <= 15) login = newText
                     loginWarningStyle = false
-                    loginSubtitleVisibility = if (newText.text.length < 100) {
-                        login = newText
-                        false
-                    } else {
-                        true
-                    }
                 },
                 subtitleVisibility = loginSubtitleVisibility,
-                subtitleText = "Вы ввели максимальное количество символов"
-            )
+                subtitleText = stringResource(id = cdr.coreresourceslib.R.string.entered_max_number_of_characters)
+                )
 
             TextFieldCard(
                 style = if (passwordWarningStyle) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard,
                 text = password,
                 label = "Пароль",
                 onTextChange = { newText ->
-                    passwordSubtitleVisibility = if (newText.text.length < 100) {
-                        password = newText
-                        false
-                    } else {
-                        true
-                    }
+                    passwordSubtitleVisibility = newText.text.length >= 15
+                    if (newText.text.length <= 15) password = newText
                     passwordWarningStyle = false
                 },
                 subtitleVisibility = passwordSubtitleVisibility,
-                subtitleText = "Вы ввели максимальное количество символов",
+                subtitleText = stringResource(id = cdr.coreresourceslib.R.string.entered_max_number_of_characters),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
             )
         }
@@ -224,7 +217,7 @@ private fun LoadingShimmer() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(PlAntTokens.Background1.getThemedColor()),
+            .background(PlAntTokens.Background0.getThemedColor()),
         contentAlignment = Alignment.Center
     ) {
         ProgressBarCircle(text = "Загрузка тестовых данных")
