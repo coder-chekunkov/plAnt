@@ -31,5 +31,7 @@ internal fun lightTheme(): Map<PlAntTokens, Color> = mapOf(
     PlAntTokens.TextFieldWarningText to Orange,
     PlAntTokens.TextFieldWarningUnfocusedText to Orange,
     PlAntTokens.TextFieldWarningUnfocusedLabel to Orange,
+    PlAntTokens.Primary to Black,
+    PlAntTokens.Secondary to Black2,
     PlAntTokens.Warning to Orange
 )

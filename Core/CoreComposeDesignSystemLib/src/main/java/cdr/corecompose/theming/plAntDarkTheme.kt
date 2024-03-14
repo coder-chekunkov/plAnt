@@ -31,5 +31,7 @@ internal fun darkTheme(): Map<PlAntTokens, Color> = mapOf(
     PlAntTokens.TextFieldWarningText to Orange,
     PlAntTokens.TextFieldWarningUnfocusedText to Orange,
     PlAntTokens.TextFieldWarningUnfocusedLabel to Orange,
+    PlAntTokens.Primary to White,
+    PlAntTokens.Secondary to White1,
     PlAntTokens.Warning to Orange
 )

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="back">Назад</string>
     <string name="close">Закрыть</string>
     <string name="entered_max_number_of_characters">Вы ввели максимальное количество символов</string>
-    <string name="show_password">Показать пароль</string>
     <string name="hide_password">Спрятать пароль</string>
+    <string name="show_password">Показать пароль</string>
 </resources>

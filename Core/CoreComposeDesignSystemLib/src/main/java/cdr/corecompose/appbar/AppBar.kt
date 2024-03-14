@@ -1,0 +1,115 @@
+package cdr.corecompose.appbar
+
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import cdr.corecompose.text.Title2
+import cdr.corecompose.theming.PlAntTokens
+import cdr.corecompose.theming.getThemedColor
+
+/**
+ * Навигационная панель сверху экрана
+ *
+ * @param modifier модифаер
+ * @param backgroundColor цвет навигационной панели
+ * @param title текст на навигационной панели
+ * @param navigationButton навигационная кнопка в начале панели
+ * @param navigationButtonClick действие по нажатию навигационной кнопки
+ * @param navigationButtonTint цвет навигационной кнопки
+ *
+ * @author Alexandr Chekunkov
+ */
+@Composable
+fun AppBar(
+    modifier: Modifier = Modifier,
+    backgroundColor: Color,
+    title: String? = null,
+    navigationButton: AppBarNavigationButtons = AppBarNavigationButtons.None,
+    navigationButtonClick: (() -> Unit)? = null,
+    navigationButtonTint: Color = PlAntTokens.Primary.getThemedColor()
+) {
+    Row(
+        modifier = modifier
+            .then(
+                Modifier
+                    .fillMaxWidth()
+                    .height(64.dp)
+                    .background(backgroundColor)
+                    .padding(
+                        vertical = 16.dp,
+                        horizontal = 8.dp
+                    )
+            ),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+
+        if (navigationButton != AppBarNavigationButtons.None) {
+            IconButton(
+                modifier = Modifier.size(24.dp),
+                onClick = navigationButtonClick ?: {}
+            ) {
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    painter = painterResource(id = navigationButton.painter),
+                    contentDescription = stringResource(id = navigationButton.contentDescription),
+                    tint = navigationButtonTint
+                )
+            }
+        }
+
+        if (title != null) {
+            Title2(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                text = title,
+                textAlign = TextAlign.Center,
+                maxLines = 1
+            )
+        }
+    }
+}
+
+/**
+ * Навигационные кнопки для AppBar
+ *
+ * @param painter id иконки на кнопке
+ * @param contentDescription id строки описания кнопки
+ *
+ * @author Alexandr Chekunkov
+ */
+sealed class AppBarNavigationButtons(
+    @DrawableRes val painter: Int,
+    @StringRes val contentDescription: Int
+) {
+    /** Кнопка отсутсвует */
+    object None : AppBarNavigationButtons(
+        painter = 0,
+        contentDescription = 0
+    )
+
+    /** Кнопка "Закрыть" - крест */
+    object Close : AppBarNavigationButtons(
+        painter = cdr.coreresourceslib.R.drawable.ic_close,
+        contentDescription = cdr.coreresourceslib.R.string.close
+    )
+
+    /** Кнопка "Назад" - стелка */
+    object Back : AppBarNavigationButtons(
+        painter = cdr.coreresourceslib.R.drawable.ic_back,
+        contentDescription = cdr.coreresourceslib.R.string.back
+    )
+}
