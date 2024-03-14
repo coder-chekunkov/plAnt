@@ -35,6 +35,8 @@ enum class PlAntTokens {
     TextFieldWarningText,
     TextFieldWarningUnfocusedText,
     TextFieldWarningUnfocusedLabel,
+    Primary,
+    Secondary,
     Warning
 }
 
