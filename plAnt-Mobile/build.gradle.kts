@@ -58,8 +58,7 @@ android {
 
 dependencies {
     implementation(project(":Core:CoreComposeDesignSystemLib"))
-    implementation(project(":Core:CoreNavigationLib"))
-    implementation(project(":Core:CoreServerRestLib"))
+    implementation(project(":Core:CoreUtilsLib"))
     implementation(project(":Core:CoreResourcesLib"))
 
     implementation("androidx.core:core-ktx:1.12.0")
@@ -71,6 +70,9 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
+    implementation("androidx.fragment:fragment-ktx:1.6.2")
+    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
 
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")

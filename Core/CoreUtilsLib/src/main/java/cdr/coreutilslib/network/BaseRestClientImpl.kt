@@ -1,4 +1,4 @@
-package cdr.coreserver
+package cdr.coreutilslib.network
 
 import com.google.gson.GsonBuilder
 import retrofit2.Retrofit
