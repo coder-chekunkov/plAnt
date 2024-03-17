@@ -48,6 +48,7 @@ import cdr.corecompose.textfield.TextFieldCardStyles
 import cdr.corecompose.theming.PlAntTheme
 import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.getThemedColor
+import cdr.coreutilslib.utils.viewModelCreator
 import cdr.plant.models.domain.TestData
 import cdr.plant.models.presentation.MainScreenState
 import kotlinx.coroutines.CoroutineScope
@@ -60,9 +61,10 @@ import kotlinx.coroutines.launch
  */
 class MainActivity : ComponentActivity() {
 
+    private val viewModel by viewModelCreator<MainViewModel> { MainViewModel() }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val viewModel = MainViewModel()
 
         setContent {
             PlAntTheme {

@@ -1,4 +1,4 @@
-package cdr.coreserver
+package cdr.coreutilslib.network
 
 import retrofit2.Retrofit
 

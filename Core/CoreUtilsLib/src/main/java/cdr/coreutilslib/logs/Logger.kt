@@ -1,4 +1,4 @@
-package cdr.corelogs
+package cdr.coreutilslib.logs
 
 /**
  * Объект логирования, который используется в системе

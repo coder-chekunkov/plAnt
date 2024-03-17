@@ -1,4 +1,4 @@
-package cdr.corelogs
+package cdr.coreutilslib.logs
 
 /**
  * Доступные уровни логгирования

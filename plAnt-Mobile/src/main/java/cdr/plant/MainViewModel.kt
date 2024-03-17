@@ -2,7 +2,8 @@ package cdr.plant
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import cdr.coreserver.BaseRestClientImpl
+import cdr.coreutilslib.network.BaseRestClientImpl
+import cdr.coreutilslib.logs.Logger
 import cdr.plant.domain.interactor.TestDataInteractorImpl
 import cdr.plant.domain.mapper.TestDataMapperImpl
 import cdr.plant.domain.repository.TestDataRepositoryImpl
@@ -40,6 +41,7 @@ internal class MainViewModel : ViewModel() {
 
             delay(1500) // Задержка 3 сек.
             getQuestion()
+            Logger.d("MainViewModel", "test data was fetched")
         }
     }
 
