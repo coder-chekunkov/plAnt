@@ -16,6 +16,7 @@
 - Progress
     - ProgressCircle
 - AlertDialog
+- SnackbarCard
 
 ---
 
@@ -36,26 +37,31 @@
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/text_field_card_preview.png" alt="TextFieldCard" width="500"/>
 
 **Blueberry** <br/>
-Blueberry - это нестандартное название кнопок, которые помогают взаимодействовать с пользователем. Имеется четыре доступных темы: стандарт, предупреждение, текст-кнопка и отключенное состояние. Все типы изображены на рисунке ниже в двух темах (светлая и темная).
+`Blueberry` - это нестандартное название кнопок, которые помогают взаимодействовать с пользователем. Имеется четыре доступных темы: стандарт, предупреждение, текст-кнопка и отключенное состояние. Все типы изображены на рисунке ниже в двух темах (светлая и темная).
 
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/blueberry_preview.png" alt="Blueberry" width="500"/>
 
 **DualBlueberryHorizontal** <br/>
-DualBlueberryHorizontal - это набор двух кнопок Blueberry, которые расположены горизонтально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
+`DualBlueberryHorizontal` - это набор двух кнопок Blueberry, которые расположены горизонтально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
 
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/dual_blueberry_horizontal_preview.png" alt="DualBlueberryHorizontal" width="500"/>
 
 **DualBlueberryVertical** <br/>
-DualBlueberryHorizontal - это набор двух кнопок Blueberry, которые расположены вертикально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
+`DualBlueberryHorizontal` - это набор двух кнопок Blueberry, которые расположены вертикально. Для каждой кнопки можно настроить свой стиль и поведение. Примеры изображены на рисунке ниже в двух темах (светлая и темная).
 
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/dual_blueberry_vertical_preview.png" alt="DualBlueberryVertical" width="500"/>
 
 **ProgressCircle** <br/>
-ProgressCircle - это доработанный ProgressBar, который вращается бесконечно. Следует использовать для загрузки каких-либо элементов или отображение статического состояния. Есть возможность добавить текст пояснения. Пример изображен на gif ниже только в темной теме.
+`ProgressCircle` - это доработанный ProgressBar, который вращается бесконечно. Следует использовать для загрузки каких-либо элементов или отображение статического состояния. Есть возможность добавить текст пояснения. Пример изображен на gif ниже только в темной теме.
 
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/progress_bar_circle_preview.gif" alt="ProgressCircle" width="250"/>
 
 **AlertDialog** <br/>
-AlertDialog - это кастомный всплывающee окно, которое используются для отображения важных сообщений или запросов пользователю. Каждый AlertDialog состоит из заголовка, подзаголовка, одной или двух кнопок действия (определяется при создании), изображения и кнопки закрытия. Пример изображен ниже только в светлой теме.
+`AlertDialog` - это кастомное всплывающee окно, которое используются для отображения важных сообщений или запросов пользователю. Каждый AlertDialog состоит из заголовка, подзаголовка, одной или двух кнопок действия (определяется при создании), изображения и кнопки закрытия. Пример изображен ниже только в светлой теме.
 
 <img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/alert_dialog_preview.png" alt="AlertDialog" width="250"/>
+
+**SnackbarCard** <br/>
+`SnackbarCard` - это кастомное всплывающee окно с сообщением внизу экрана. Данный компонент состоит из иконки вначале элемента, текста и кнопки закрытия. Элемент способен только уведомлять о каком-то событии. Пример изображен ниже только в светлой теме.
+
+<img src="https://github.com/coder-chekunkov/plAnt/blob/develop/Core/CoreComposeDesignSystemLib/examples/snackbar_preview.png" alt="AlertDialog" width="250"/>
