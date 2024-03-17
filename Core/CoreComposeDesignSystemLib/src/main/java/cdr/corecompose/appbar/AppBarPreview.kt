@@ -8,6 +8,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
@@ -24,10 +25,11 @@ internal fun AppBarPreviewLightTheme() {
         Scaffold(
             modifier = Modifier
                 .fillMaxSize()
-                .background(PlAntTokens.Background0.getThemedColor()),
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
             topBar = {
                 AppBar(
-                    backgroundColor = PlAntTokens.Background0.getThemedColor(),
+                    backgroundColor = PlAntTokens.Background1.getThemedColor(),
                     title = "Профиль",
                     navigationButton = AppBarNavigationButtons.Close
                 )
@@ -37,7 +39,7 @@ internal fun AppBarPreviewLightTheme() {
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
-                    .background(PlAntTokens.Secondary.getThemedColor())
+                    .background(PlAntTokens.Background1.getThemedColor())
             ) {}
         }
     }
@@ -53,7 +55,10 @@ internal fun AppBarPreviewLightTheme() {
 internal fun AppBarPreviewDarkTheme() {
     PreviewPlantTheme(darkTheme = true) {
         Scaffold(
-            modifier = Modifier.fillMaxSize(),
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
             topBar = {
                 AppBar(
                     backgroundColor = PlAntTokens.Background1.getThemedColor(),
@@ -65,7 +70,7 @@ internal fun AppBarPreviewDarkTheme() {
                 modifier = Modifier
                     .padding(paddingValues)
                     .fillMaxSize()
-                    .background(PlAntTokens.Secondary.getThemedColor())
+                    .background(PlAntTokens.Background1.getThemedColor())
             ) {}
         }
     }

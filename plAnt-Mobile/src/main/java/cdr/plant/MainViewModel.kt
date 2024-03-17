@@ -38,7 +38,7 @@ internal class MainViewModel : ViewModel() {
             testDataList = testDataInteractor.getTestData()
             currentNumber = 0
 
-            delay(3000) // Задержка 3 сек.
+            delay(1500) // Задержка 3 сек.
             getQuestion()
         }
     }

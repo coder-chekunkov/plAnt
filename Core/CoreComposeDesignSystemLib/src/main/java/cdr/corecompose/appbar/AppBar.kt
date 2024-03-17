@@ -3,6 +3,7 @@ package cdr.corecompose.appbar
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -31,6 +32,7 @@ import cdr.corecompose.theming.getThemedColor
  * @param navigationButton навигационная кнопка в начале панели
  * @param navigationButtonClick действие по нажатию навигационной кнопки
  * @param navigationButtonTint цвет навигационной кнопки
+ * @param paddingValues отсупы внутри навигационной панели
  *
  * @author Alexandr Chekunkov
  */
@@ -41,7 +43,8 @@ fun AppBar(
     title: String? = null,
     navigationButton: AppBarNavigationButtons = AppBarNavigationButtons.None,
     navigationButtonClick: (() -> Unit)? = null,
-    navigationButtonTint: Color = PlAntTokens.Primary.getThemedColor()
+    navigationButtonTint: Color = PlAntTokens.Primary.getThemedColor(),
+    paddingValues: PaddingValues = PaddingValues(vertical = 16.dp, horizontal = 0.dp)
 ) {
     Row(
         modifier = modifier
@@ -50,10 +53,7 @@ fun AppBar(
                     .fillMaxWidth()
                     .height(64.dp)
                     .background(backgroundColor)
-                    .padding(
-                        vertical = 16.dp,
-                        horizontal = 8.dp
-                    )
+                    .padding(paddingValues)
             ),
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -72,9 +72,10 @@ fun AppBar(
             }
         }
 
+        val titlePadding = if (navigationButton != AppBarNavigationButtons.None) 16.dp else 0.dp
         if (title != null) {
             Title2(
-                modifier = Modifier.padding(horizontal = 16.dp),
+                modifier = Modifier.padding(horizontal = titlePadding),
                 text = title,
                 textAlign = TextAlign.Center,
                 maxLines = 1

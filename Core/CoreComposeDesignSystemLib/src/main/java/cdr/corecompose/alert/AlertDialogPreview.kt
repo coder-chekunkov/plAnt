@@ -3,6 +3,8 @@ package cdr.corecompose.alert
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -10,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import cdr.corecompose.buttons.blueberry.BlueberryStyle
 import cdr.corecompose.buttons.dual.vertical.DualBlueberryVertical
 import cdr.corecompose.theming.PlAntTokens
@@ -27,35 +30,41 @@ internal fun AlertDialogPreviewLightTheme() {
     PreviewPlantTheme(darkTheme = false) {
         var alert1 by remember { mutableStateOf(false) }
         var alert2 by remember { mutableStateOf(false) }
-
-        Column(
+        Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .background(PlAntTokens.Background1.getThemedColor())
-        ) {
-            DualBlueberryVertical(
-                firstButtonText = "Алерт-диалог (одна кнопка)",
-                secondButtonText = "Алерт-диалог (две кнопки)",
-                secondButtonStyle = BlueberryStyle.Negative,
-                firstButtonClick = { alert1 = true },
-                secondButtonClick = { alert2 = true }
-            )
-
-            if (alert1) {
-                AlertDialog(
-                    data = alertDialogData1,
-                    onDismissClick = { alert1 = false },
-                    onFirstButtonClick = { alert1 = false }
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(PlAntTokens.Background1.getThemedColor())
+            ) {
+                DualBlueberryVertical(
+                    firstButtonText = "Алерт-диалог (одна кнопка)",
+                    secondButtonText = "Алерт-диалог (две кнопки)",
+                    secondButtonStyle = BlueberryStyle.Negative,
+                    firstButtonClick = { alert1 = true },
+                    secondButtonClick = { alert2 = true }
                 )
-            }
 
-            if (alert2) {
-                AlertDialog(
-                    data = alertDialogData2,
-                    onDismissClick = { alert2 = false },
-                    onFirstButtonClick = { alert2 = false },
-                    onSecondButtonClick = { alert2 = false }
-                )
+                if (alert1) {
+                    AlertDialog(
+                        data = alertDialogData1,
+                        onDismissClick = { alert1 = false },
+                        onFirstButtonClick = { alert1 = false }
+                    )
+                }
+
+                if (alert2) {
+                    AlertDialog(
+                        data = alertDialogData2,
+                        onDismissClick = { alert2 = false },
+                        onFirstButtonClick = { alert2 = false },
+                        onSecondButtonClick = { alert2 = false }
+                    )
+                }
             }
         }
     }
@@ -73,34 +82,41 @@ internal fun AlertDialogPreviewDarkTheme() {
         var alert1 by remember { mutableStateOf(false) }
         var alert2 by remember { mutableStateOf(false) }
 
-        Column(
+        Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .background(PlAntTokens.Background1.getThemedColor())
-        ) {
-            DualBlueberryVertical(
-                firstButtonText = "Алерт-диалог (одна кнопка)",
-                secondButtonText = "Алерт-диалог (две кнопки)",
-                secondButtonStyle = BlueberryStyle.Negative,
-                firstButtonClick = { alert1 = true },
-                secondButtonClick = { alert2 = true }
-            )
-
-            if (alert1) {
-                AlertDialog(
-                    data = alertDialogData1,
-                    onDismissClick = { alert1 = false },
-                    onFirstButtonClick = { alert1 = false }
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(PlAntTokens.Background1.getThemedColor())
+            ) {
+                DualBlueberryVertical(
+                    firstButtonText = "Алерт-диалог (одна кнопка)",
+                    secondButtonText = "Алерт-диалог (две кнопки)",
+                    secondButtonStyle = BlueberryStyle.Negative,
+                    firstButtonClick = { alert1 = true },
+                    secondButtonClick = { alert2 = true }
                 )
-            }
 
-            if (alert2) {
-                AlertDialog(
-                    data = alertDialogData2,
-                    onDismissClick = { alert2 = false },
-                    onFirstButtonClick = { alert2 = false },
-                    onSecondButtonClick = { alert2 = false }
-                )
+                if (alert1) {
+                    AlertDialog(
+                        data = alertDialogData1,
+                        onDismissClick = { alert1 = false },
+                        onFirstButtonClick = { alert1 = false }
+                    )
+                }
+
+                if (alert2) {
+                    AlertDialog(
+                        data = alertDialogData2,
+                        onDismissClick = { alert2 = false },
+                        onFirstButtonClick = { alert2 = false },
+                        onSecondButtonClick = { alert2 = false }
+                    )
+                }
             }
         }
     }
