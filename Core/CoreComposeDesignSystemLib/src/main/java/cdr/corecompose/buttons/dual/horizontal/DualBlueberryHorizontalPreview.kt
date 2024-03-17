@@ -3,9 +3,13 @@ package cdr.corecompose.buttons.dual.horizontal
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
 
@@ -18,17 +22,24 @@ import cdr.corecompose.theming.getThemedColor
 @Composable
 internal fun DualBlueberryHorizontalPreviewLightTheme() {
     PreviewPlantTheme(darkTheme = false) {
-        Column(
+        Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .background(cdr.corecompose.theming.PlAntTokens.Background1.getThemedColor())
-        ) {
-            DualBlueberryHorizontal(
-                firstButtonText = "Удалить",
-                secondButtonText = "Отмена",
-                firstButtonClick = {},
-                secondButtonClick = {}
-            )
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(PlAntTokens.Background1.getThemedColor())
+            ) {
+                DualBlueberryHorizontal(
+                    firstButtonText = "Удалить",
+                    secondButtonText = "Отмена",
+                    firstButtonClick = {},
+                    secondButtonClick = {}
+                )
+            }
         }
     }
 }
@@ -42,17 +53,24 @@ internal fun DualBlueberryHorizontalPreviewLightTheme() {
 @Composable
 internal fun DualBlueberryHorizontalPreviewDarkTheme() {
     PreviewPlantTheme(darkTheme = true) {
-        Column(
+        Scaffold(
             modifier = Modifier
-                .fillMaxSize()
-                .background(cdr.corecompose.theming.PlAntTokens.Background1.getThemedColor())
-        ) {
-            DualBlueberryHorizontal(
-                firstButtonText = "Удалить",
-                secondButtonText = "Отмена",
-                firstButtonClick = {},
-                secondButtonClick = {}
-            )
+                .padding(horizontal = 16.dp)
+                .background(PlAntTokens.Background1.getThemedColor()),
+        ) { paddingValues ->
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(paddingValues)
+                    .background(PlAntTokens.Background1.getThemedColor())
+            ) {
+                DualBlueberryHorizontal(
+                    firstButtonText = "Удалить",
+                    secondButtonText = "Отмена",
+                    firstButtonClick = {},
+                    secondButtonClick = {}
+                )
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 <resources>
     <string name="back">Назад</string>
     <string name="close">Закрыть</string>
+    <string name="complete_the_steps_above_to_continue">Заполните пункты выше, чтобы продолжить</string>
     <string name="entered_max_number_of_characters">Вы ввели максимальное количество символов</string>
     <string name="hide_password">Спрятать пароль</string>
     <string name="show_password">Показать пароль</string>

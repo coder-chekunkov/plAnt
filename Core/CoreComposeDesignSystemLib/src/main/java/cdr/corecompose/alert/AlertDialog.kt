@@ -93,23 +93,23 @@ fun AlertDialog(
                         textAlign = TextAlign.Start,
                         maxLines = 4
                     )
-                }
 
-                if (onSecondButtonClick == null) {
-                    Blueberry(
-                        text = data.firstButtonText,
-                        style = data.firstButtonStyle,
-                        onClick = onFirstButtonClick
-                    )
-                } else {
-                    DualBlueberryVertical(
-                        firstButtonText = data.firstButtonText,
-                        secondButtonText = data.secondButtonText ?: "",
-                        firstButtonClick = onFirstButtonClick,
-                        secondButtonClick = onSecondButtonClick,
-                        firstButtonStyle = data.firstButtonStyle,
-                        secondButtonStyle = data.secondButtonStyle
-                    )
+                    if (onSecondButtonClick == null) {
+                        Blueberry(
+                            text = data.firstButtonText,
+                            style = data.firstButtonStyle,
+                            onClick = onFirstButtonClick
+                        )
+                    } else {
+                        DualBlueberryVertical(
+                            firstButtonText = data.firstButtonText,
+                            secondButtonText = data.secondButtonText ?: "",
+                            firstButtonClick = onFirstButtonClick,
+                            secondButtonClick = onSecondButtonClick,
+                            firstButtonStyle = data.firstButtonStyle,
+                            secondButtonStyle = data.secondButtonStyle
+                        )
+                    }
                 }
             }
         }

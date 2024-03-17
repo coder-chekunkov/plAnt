@@ -63,7 +63,7 @@ fun Blueberry(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    horizontalPadding: Dp = 16.dp,
+    horizontalPadding: Dp = 0.dp,
     verticalPadding: Dp = 16.dp
 ) = when (style) {
     BlueberryStyle.Standard -> StandardBlueberry(text, onClick, modifier, isEnabled, horizontalPadding, verticalPadding)
@@ -87,7 +87,7 @@ private fun StandardBlueberry(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    horizontalPadding: Dp = 16.dp,
+    horizontalPadding: Dp = 0.dp,
     verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
@@ -122,7 +122,7 @@ private fun TransparentBlueberry(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    horizontalPadding: Dp = 16.dp,
+    horizontalPadding: Dp = 0.dp,
     verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
@@ -157,7 +157,7 @@ private fun NegativeBlueberry(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     isEnabled: Boolean = true,
-    horizontalPadding: Dp = 16.dp,
+    horizontalPadding: Dp = 0.dp,
     verticalPadding: Dp = 16.dp
 ) {
     InnerBlueberry(
