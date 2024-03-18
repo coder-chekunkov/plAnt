@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="create_account">Создать аккаунт</string>
+    <string name="sign_in">Войти</string>
+    <string name="enter_login_and_password">Введите логин и пароль</string>
+    <string name="to_authorize_enter_your_account_information">Для авторизации введите данные учетной записи</string>
+</resources>
