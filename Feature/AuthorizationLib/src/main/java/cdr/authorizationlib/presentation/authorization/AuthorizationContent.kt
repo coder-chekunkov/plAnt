@@ -141,20 +141,20 @@ private fun Screen(
 
             Column {
                 TextFieldCard(
-                    style = data.loginStyle,
-                    text = data.login,
+                    style = data.login.style,
+                    text = data.login.text,
                     label = stringResource(id = CoreR.string.login),
                     onTextChange = viewModel::handleNewLogin,
-                    subtitleVisibility = data.loginSubtitleVisibility,
+                    subtitleVisibility = data.login.subtitleVisibility,
                     subtitleText = stringResource(id = cdr.coreresourceslib.R.string.entered_max_number_of_characters)
                 )
 
                 TextFieldCard(
-                    style = data.passwordStyle,
-                    text = data.password,
+                    style = data.password.style,
+                    text = data.password.text,
                     label = stringResource(id = CoreR.string.password),
                     onTextChange = viewModel::handleNewPassword,
-                    subtitleVisibility = data.passwordSubtitleVisibility,
+                    subtitleVisibility = data.password.subtitleVisibility,
                     subtitleText = stringResource(id = cdr.coreresourceslib.R.string.entered_max_number_of_characters),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
                 )
@@ -257,7 +257,7 @@ private fun LoadingShimmer(
  *
  * @author Alexandr Chekunkov
  */
-fun showSnackbarCard(
+private fun showSnackbarCard(
     snackbarHostState: SnackbarHostState,
     coroutineScope: CoroutineScope,
     message: String

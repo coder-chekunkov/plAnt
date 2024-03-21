@@ -26,21 +26,28 @@ internal sealed interface AuthorizationState {
  * UI-модель, содержащая в себе данные на экране
  *
  * @property login логин пользователя
- * @property loginSubtitleVisibility видимость подзагловка у поля ввода логина
- * @property loginStyle стиль поля ввода логина
  * @property password пароль пользователя
- * @property passwordSubtitleVisibility видимость подзагловка у поля ввода пароля
- * @property passwordStyle стиль поля ввода пароля
  * @property isShowErrorAlert нужно ли показывать AlertDialog с ошибкой
  *
  * @author Alexandr Chekunkov
  */
 internal data class AuthorizationScreen(
-    val login: TextFieldValue = TextFieldValue(),
-    val loginSubtitleVisibility: Boolean = false,
-    val loginStyle: TextFieldCardStyles = TextFieldCardStyles.Standard,
-    val password: TextFieldValue = TextFieldValue(),
-    val passwordSubtitleVisibility: Boolean = false,
-    val passwordStyle: TextFieldCardStyles = TextFieldCardStyles.Standard,
+    val login: AuthorizationField = AuthorizationField(),
+    val password: AuthorizationField = AuthorizationField(),
     val isShowErrorAlert: Boolean = false
+)
+
+/**
+ * UI-модель, содержащая в себе данные поля ввода текста
+ *
+ * @property text текст поля ввода
+ * @property subtitleVisibility видимость подзаголовка поля ввода
+ * @property style стиль поля ввода
+ *
+ * @author Alexandr Chekunkov
+ */
+internal data class AuthorizationField(
+    val text: TextFieldValue = TextFieldValue(),
+    val subtitleVisibility: Boolean = false,
+    val style: TextFieldCardStyles = TextFieldCardStyles.Standard
 )

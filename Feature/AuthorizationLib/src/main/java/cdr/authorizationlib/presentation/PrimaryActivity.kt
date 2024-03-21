@@ -9,6 +9,8 @@ import cdr.authorizationlib.presentation.authorization.AuthorizationContent
 import cdr.authorizationlib.presentation.authorization.AuthorizationViewModel
 import cdr.authorizationlib.presentation.dividing.DividingContent
 import cdr.authorizationlib.presentation.dividing.DividingViewModel
+import cdr.authorizationlib.presentation.registration.RegistrationContent
+import cdr.authorizationlib.presentation.registration.RegistrationViewModel
 import cdr.corecompose.theming.PlAntTheme
 
 /**
@@ -24,7 +26,8 @@ internal class PrimaryActivity : ComponentActivity() {
         setContent {
             PlAntTheme {
 //                DividingContent(viewModel = DividingViewModel())
-                AuthorizationContent(viewModel = AuthorizationViewModel())
+//                AuthorizationContent(viewModel = AuthorizationViewModel())
+                RegistrationContent(viewModel = RegistrationViewModel())
             }
         }
     }

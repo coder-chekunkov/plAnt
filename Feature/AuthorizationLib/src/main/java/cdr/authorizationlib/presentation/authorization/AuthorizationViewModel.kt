@@ -3,6 +3,7 @@ package cdr.authorizationlib.presentation.authorization
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cdr.authorizationlib.models.presentation.AuthorizationScreen
 import cdr.authorizationlib.models.presentation.AuthorizationState
 import cdr.corecompose.textfield.TextFieldCardStyles
 import cdr.coreutilslib.logs.Logger
@@ -42,29 +43,37 @@ internal class AuthorizationViewModel : ViewModel() {
             if (currentState is AuthorizationState.Screen) {
                 val currentData = currentState.data
 
-                val blankLogin = currentData.login.text.isBlank()
-                val blankPassword = currentData.password.text.isBlank()
-
-                if (blankLogin || blankPassword) {
-                    _state.value = AuthorizationState.Screen(
-                        data = currentData.copy(
-                            loginStyle = if (blankLogin) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard,
-                            passwordStyle = if (blankPassword) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard
-                        )
-                    )
-                    _action.emit(Unit)
-                } else {
+                if (checkIsNotBlank(currentData)) {
                     _state.value = AuthorizationState.Loading
-
                     // TODO: логика обращения к удаленному сервису с авторизацией
                     delay(1350) // удалить после выполнения задачи
 
-                    _state.value = AuthorizationState.Screen(
-                        data = currentData.copy(isShowErrorAlert = true)
-                    )
+                    _state.value = AuthorizationState.Screen(data = currentData.copy(isShowErrorAlert = true))
                 }
             }
         }
+    }
+
+    /** Проверка на пустые поля */
+    private suspend fun checkIsNotBlank(currentData: AuthorizationScreen): Boolean {
+        val blankLogin = currentData.login.text.text.isBlank()
+        val blankPassword = currentData.password.text.text.isBlank()
+
+        return if (blankLogin || blankPassword) {
+            _state.value = AuthorizationState.Screen(
+                data = currentData.copy(
+                    login = currentData.login.copy(
+                        style = if (blankLogin) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard
+                    ),
+                    password = currentData.password.copy(
+                        style = if (blankPassword) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard
+                    )
+                )
+            )
+            _action.emit(Unit)
+
+            false
+        } else true
     }
 
     /** Обработка нового логина с UI */
@@ -75,9 +84,11 @@ internal class AuthorizationViewModel : ViewModel() {
 
             _state.value = AuthorizationState.Screen(
                 data = currentData.copy(
-                    login = if (newLogin.text.length <= MAX_CHARACTERS) newLogin else currentData.login,
-                    loginSubtitleVisibility = newLogin.text.length >= MAX_CHARACTERS,
-                    loginStyle = TextFieldCardStyles.Standard
+                    login = currentData.login.copy(
+                        text = if (newLogin.text.length <= MAX_CHARACTERS) newLogin else currentData.login.text,
+                        subtitleVisibility = newLogin.text.length >= MAX_CHARACTERS,
+                        style = TextFieldCardStyles.Standard
+                    )
                 )
             )
         }
@@ -90,9 +101,11 @@ internal class AuthorizationViewModel : ViewModel() {
             val currentData = currentState.data
             _state.value = AuthorizationState.Screen(
                 data = currentData.copy(
-                    password = if (newPassword.text.length <= MAX_CHARACTERS) newPassword else currentData.password,
-                    passwordSubtitleVisibility = newPassword.text.length >= MAX_CHARACTERS,
-                    passwordStyle = TextFieldCardStyles.Standard
+                    password = currentData.password.copy(
+                        text = if (newPassword.text.length <= MAX_CHARACTERS) newPassword else currentData.password.text,
+                        subtitleVisibility = newPassword.text.length >= MAX_CHARACTERS,
+                        style = TextFieldCardStyles.Standard
+                    ),
                 )
             )
         }
