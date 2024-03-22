@@ -15,7 +15,7 @@ import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
 
 /**
- * Превью для двойных вертикальных кнопок (светлая тема)
+ * Превью для [DualBlueberryVertical] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -46,7 +46,7 @@ internal fun DualBlueberryVerticalPreviewLightTheme() {
 }
 
 /**
- * Превью для двойных вертикальных кнопок (темная тема)
+ * Превью для [DualBlueberryVertical] (темная тема)
  *
  * @author Alexandr Chekunkov
  */

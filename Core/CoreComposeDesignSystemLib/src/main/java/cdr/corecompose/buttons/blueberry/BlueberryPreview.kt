@@ -14,7 +14,7 @@ import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.PreviewPlantTheme
 
 /**
- * Превью для всех доступных кнопок (светлая тема)
+ * Превью для всех доступных [Blueberry] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -55,7 +55,7 @@ internal fun BlueberryPreviewLightTheme() {
 
 
 /**
- * Превью для всех доступных кнопок (темная тема)
+ * Превью для всех доступных [Blueberry] (темная тема)
  *
  * @author Alexandr Chekunkov
  */

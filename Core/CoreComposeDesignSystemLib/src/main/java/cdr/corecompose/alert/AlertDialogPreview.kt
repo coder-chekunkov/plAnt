@@ -20,7 +20,7 @@ import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
 
 /**
- * Превью для алерт-диалога (светлая тема)
+ * Превью для [AlertDialog] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -71,7 +71,7 @@ internal fun AlertDialogPreviewLightTheme() {
 }
 
 /**
- * Превью для алерт-диалога (темная тема)
+ * Превью для [AlertDialog] (темная тема)
  *
  * @author Alexandr Chekunkov
  */

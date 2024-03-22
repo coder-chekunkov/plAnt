@@ -4,8 +4,6 @@
     <string name="sign_in">Войти</string>
     <string name="enter_login_and_password">Введите логин и пароль</string>
     <string name="enter_information">Заполните данные</string>
-    <string name="passwords_must_be_same">Пароли должны совпадать</string>
     <string name="to_authorize_enter_your_account_information">Для авторизации введите данные учетной записи</string>
     <string name="to_registration_enter_new_account_information">Для регистрации заполните данные новой учетной записи</string>
-    <string name="tiny_password">Пароль должен содержать не менее 8-ми символов</string>
 </resources>

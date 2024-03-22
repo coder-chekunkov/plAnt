@@ -20,7 +20,7 @@ import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
 
 /**
- * Превью для поля ввода (светлая тема)
+ * Превью для [TextFieldCard] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -73,7 +73,7 @@ internal fun TextFieldCardPreviewLightTheme() {
 }
 
 /**
- * Превью для поля ввода (темная тема)
+ * Превью для [TextFieldCard] (темная тема)
  *
  * @author Alexandr Chekunkov
  */

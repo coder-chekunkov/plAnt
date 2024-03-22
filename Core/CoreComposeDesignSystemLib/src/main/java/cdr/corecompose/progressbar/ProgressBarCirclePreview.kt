@@ -9,7 +9,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import cdr.corecompose.theming.PreviewPlantTheme
 
 /**
- * Превью бесконечного круглого прогресс бара (светлая тема)
+ * Превью для [ProgressBarCircle] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -29,7 +29,7 @@ internal fun ProgressBarPreviewLightTheme() {
 }
 
 /**
- * Превью бесконечного круглого прогресс бара (темная тема)
+ * Превью для [ProgressBarCircle] (темная тема)
  *
  * @author Alexandr Chekunkov
  */
