@@ -32,12 +32,16 @@ import cdr.authorizationlib.models.presentation.RegistrationAction
 import cdr.coreresourceslib.R as CoreR
 import cdr.authorizationlib.models.presentation.RegistrationScreen
 import cdr.authorizationlib.models.presentation.RegistrationState
+import cdr.authorizationlib.presentation.registration.RegistrationViewModel.Companion.DEVELOPER_ID
+import cdr.authorizationlib.presentation.registration.RegistrationViewModel.Companion.QA_ID
 import cdr.corecompose.alert.AlertDialog
 import cdr.corecompose.alert.AlertDialogData
 import cdr.corecompose.appbar.AppBar
 import cdr.corecompose.appbar.AppBarNavigationButtons
 import cdr.corecompose.buttons.blueberry.Blueberry
 import cdr.corecompose.buttons.blueberry.BlueberryStyle
+import cdr.corecompose.chip.chipcard.ChipData
+import cdr.corecompose.chip.chipgroup.ChipCardGroup
 import cdr.corecompose.progressbar.ProgressBarCircle
 import cdr.corecompose.snackbar.SnackbarCard
 import cdr.corecompose.snackbar.SnackbarCardData
@@ -185,6 +189,14 @@ private fun Screen(
                     subtitleText = stringResource(id = CoreR.string.entered_max_number_of_characters)
                 )
 
+                ChipCardGroup(
+                    chips = listOf(
+                        ChipData(id = DEVELOPER_ID, style = data.roleChips.chipsStyle, title = stringResource(id = CoreR.string.developer)),
+                        ChipData(id = QA_ID, style = data.roleChips.chipsStyle, title = stringResource(id = CoreR.string.qa))
+                    ),
+                    onSelectedChips = viewModel::handleRole
+                )
+
                 Blueberry(
                     text = stringResource(id = CoreR.string.next),
                     style = BlueberryStyle.Standard,
@@ -198,8 +210,9 @@ private fun Screen(
 
     val lifecycleOwner = LocalLifecycleOwner.current
     val emptyFieldsMessage = stringResource(id = CoreR.string.complete_the_steps_above_to_continue)
-    val differentPasswordsMessage = stringResource(id = R.string.passwords_must_be_same)
-    val tinyPasswordMessage = stringResource(id = R.string.tiny_password)
+    val differentPasswordsMessage = stringResource(id = CoreR.string.passwords_must_be_same)
+    val tinyPasswordMessage = stringResource(id = CoreR.string.tiny_password)
+    val easyPasswordMessage = stringResource(id = CoreR.string.password_must_consist_of_numbers_uppercase_and_lowercase_letters)
     LaunchedEffect(Unit) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             withContext(Dispatchers.Main.immediate) {
@@ -222,6 +235,14 @@ private fun Screen(
                             coroutineScope = coroutineScope,
                             message = tinyPasswordMessage
                         )
+
+                        RegistrationAction.EasyPassword -> {
+                            showSnackbarCard(
+                                snackbarHostState = snackbarHostState,
+                                coroutineScope = coroutineScope,
+                                message = easyPasswordMessage
+                            )
+                        }
                     }
                 }
             }

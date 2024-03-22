@@ -6,6 +6,8 @@ import androidx.lifecycle.viewModelScope
 import cdr.authorizationlib.models.presentation.RegistrationAction
 import cdr.authorizationlib.models.presentation.RegistrationScreen
 import cdr.authorizationlib.models.presentation.RegistrationState
+import cdr.authorizationlib.models.presentation.RoleChip
+import cdr.corecompose.chip.chipcard.ChipCardStyle
 import cdr.corecompose.textfield.TextFieldCardStyles
 import cdr.coreutilslib.logs.Logger
 import kotlinx.coroutines.delay
@@ -69,6 +71,7 @@ internal class RegistrationViewModel : ViewModel() {
         val blankSecondPassword = currentData.secondPassword.text.text.isBlank()
         val blankName = currentData.name.text.text.isBlank()
         val blankSurname = currentData.surname.text.text.isBlank()
+        val blankRole = currentData.roleChips.selectedChipRole == null
 
         return if (blankLogin || blankFirstPassword || blankSecondPassword || blankName || blankSurname) {
             _state.value = RegistrationState.Screen(
@@ -88,6 +91,9 @@ internal class RegistrationViewModel : ViewModel() {
                     surname = currentData.surname.copy(
                         style = if (blankSurname) TextFieldCardStyles.Warning else TextFieldCardStyles.Standard
                     ),
+                    roleChips = currentData.roleChips.copy(
+                        chipsStyle = if (blankRole) ChipCardStyle.Warning else ChipCardStyle.Standard
+                    )
                 )
             )
             _action.emit(RegistrationAction.EmptyFields)
@@ -126,7 +132,17 @@ internal class RegistrationViewModel : ViewModel() {
 
     /** Проверка на сложность пароля */
     private suspend fun checkIsNotEasyPassword(currentData: RegistrationScreen): Boolean =
-        true
+        if (true) {
+            _state.value = RegistrationState.Screen(
+                data = currentData.copy(
+                    firstPassword = currentData.firstPassword.copy(style = TextFieldCardStyles.Warning),
+                    secondPassword = currentData.secondPassword.copy(style = TextFieldCardStyles.Warning)
+                )
+            )
+            _action.emit(RegistrationAction.EasyPassword)
+
+            false
+        } else true
 
     /** Обработка нового логина с UI */
     fun handleNewLogin(newLogin: TextFieldValue) {
@@ -218,6 +234,28 @@ internal class RegistrationViewModel : ViewModel() {
         }
     }
 
+    /** Обработка нового роль с UI (разработчик или тестировщик) */
+    fun handleRole(list: List<Int>) {
+        val currentState = _state.value
+        if (currentState is RegistrationState.Screen) {
+            val currentData = currentState.data
+
+            _state.value = RegistrationState.Screen(
+                data = currentData.copy(
+                    roleChips = currentData.roleChips.copy(
+                        chipsStyle = ChipCardStyle.Standard,
+                        selectedChipRole = when {
+                            list.isEmpty() -> null
+                            list.first() == DEVELOPER_ID -> RoleChip.DEVELOPER
+                            list.first() == QA_ID -> RoleChip.QA
+                            else -> null
+                        }
+                    )
+                )
+            )
+        }
+    }
+
 
     /** Сокрытие AlertDialog с UI */
     fun dismissAlertDialog() {
@@ -236,5 +274,8 @@ internal class RegistrationViewModel : ViewModel() {
         private const val TAG = "RegistrationViewModel"
         private const val MAX_CHARACTERS = 64
         private const val MIN_PASSWORD_SIZE = 8
+
+        const val DEVELOPER_ID = 0
+        const val QA_ID = 1
     }
 }

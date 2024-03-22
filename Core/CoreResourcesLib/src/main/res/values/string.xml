@@ -4,14 +4,19 @@
     <string name="close">Закрыть</string>
     <string name="complete_the_steps_above_to_continue">Заполните пункты выше, чтобы продолжить</string>
     <string name="check_the_correctness_of_the_entered_data_and_internet">Проверьте корректность введенных данных и наличие интернет сети</string>
+    <string name="developer">Разработчик</string>
     <string name="entered_max_number_of_characters">Вы ввели максимальное количество символов</string>
     <string name="error_has_occurred">Произошла ошибка</string>
     <string name="hide_password">Спрятать пароль</string>
     <string name="login">Логин</string>
     <string name="password">Пароль</string>
+    <string name="passwords_must_be_same">Пароли должны совпадать</string>
+    <string name="password_must_consist_of_numbers_uppercase_and_lowercase_letters">Пароль должен состоять из цифр, прописных и строчных букв</string>
+    <string name="tiny_password">Пароль должен содержать не менее 8-ми символов</string>
     <string name="again_password">Повторите пароль</string>
     <string name="next">Продолжить</string>
     <string name="name">Имя</string>
     <string name="surname">Фамилия</string>
     <string name="show_password">Показать пароль</string>
+    <string name="qa">Тестировщик</string>
 </resources>

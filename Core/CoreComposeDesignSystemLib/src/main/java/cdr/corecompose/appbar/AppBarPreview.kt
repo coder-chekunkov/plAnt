@@ -14,7 +14,7 @@ import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
 
 /**
- * Превью для AppBar (светлая тема)
+ * Превью для [AppBar] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -46,7 +46,7 @@ internal fun AppBarPreviewLightTheme() {
 }
 
 /**
- * Превью для AppBar (темная тема)
+ * Превью для [AppBar] (темная тема)
  *
  * @author Alexandr Chekunkov
  */

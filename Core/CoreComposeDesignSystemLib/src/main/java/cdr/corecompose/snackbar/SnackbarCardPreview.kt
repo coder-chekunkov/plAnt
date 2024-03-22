@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
 import cdr.coreresourceslib.R
 
 /**
- * Превью для Snackbar (светлая тема)
+ * Превью для [SnackbarCard] (светлая тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -82,7 +82,7 @@ internal fun SnackbarCardLightThemePreview() {
 }
 
 /**
- * Превью для Snackbar (темная тема)
+ * Превью для [SnackbarCard] (темная тема)
  *
  * @author Alexandr Chekunkov
  */
@@ -130,8 +130,6 @@ internal fun SnackbarCardDarkThemePreview() {
                         coroutineScope.launch {
                             snackbarHostState.showSnackbarCard(
                                 message = "Заполните пункты выше, чтобы продолжить, Заполните пункты выше, чтобы продолжить, Заполните пункты выше, чтобы продолжить, Заполните пункты выше, чтобы продолжить, Заполните пункты выше, чтобы продолжить"
-
-//                                message = "Заполните пункты выше, чтобы продолжить"
                             )
                         }
                     },
