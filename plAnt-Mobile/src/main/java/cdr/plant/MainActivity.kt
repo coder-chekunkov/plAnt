@@ -18,5 +18,6 @@ class MainActivity : ComponentActivity() {
             activity = this,
             launchData = AuthorizationLaunchData.PRIMARY
         )
+        finish()
     }
 }

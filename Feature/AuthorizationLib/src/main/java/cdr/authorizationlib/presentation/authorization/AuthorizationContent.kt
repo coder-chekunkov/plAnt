@@ -29,6 +29,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
 import cdr.authorizationlib.R
+import cdr.authorizationlib.models.presentation.AuthorizationAction
 import cdr.authorizationlib.models.presentation.AuthorizationScreen
 import cdr.authorizationlib.models.presentation.AuthorizationState
 import cdr.corecompose.alert.AlertDialog
@@ -56,18 +57,24 @@ import kotlinx.coroutines.withContext
  * Контент на экране авторизации
  *
  * @param viewModel ViewModel для экрана авторизации
+ * @param onNavigationPressed действие по нажатию на навигационную кнопку
  *
  * @author Alexandr Chekunkov
  */
 @Composable
 internal fun AuthorizationContent(
-    viewModel: AuthorizationViewModel
+    viewModel: AuthorizationViewModel,
+    onNavigationPressed: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when (val currentState = state) {
-        is AuthorizationState.Screen -> Screen(viewModel = viewModel, data = currentState.data)
         is AuthorizationState.Loading -> LoadingShimmer(viewModel = viewModel)
+        is AuthorizationState.Screen -> Screen(
+            viewModel = viewModel,
+            data = currentState.data,
+            onNavigationPressed = onNavigationPressed
+        )
     }
 }
 
@@ -82,7 +89,8 @@ internal fun AuthorizationContent(
 @Composable
 private fun Screen(
     viewModel: AuthorizationViewModel,
-    data: AuthorizationScreen
+    data: AuthorizationScreen,
+    onNavigationPressed: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -96,7 +104,7 @@ private fun Screen(
             AppBar(
                 backgroundColor = PlAntTokens.Background0.getThemedColor(),
                 navigationButton = AppBarNavigationButtons.Back,
-                navigationButtonClick = { viewModel.launchPreviousScreen() },
+                navigationButtonClick = { viewModel.onNavigationPressed() },
                 navigationButtonTint = PlAntTokens.Primary.getThemedColor()
             )
         },
@@ -175,12 +183,15 @@ private fun Screen(
     LaunchedEffect(Unit) {
         lifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
             withContext(Dispatchers.Main.immediate) {
-                viewModel.action.collect {
-                    showSnackbarCard(
-                        snackbarHostState = snackbarHostState,
-                        coroutineScope = coroutineScope,
-                        message = snackbarMessage
-                    )
+                viewModel.action.collect { authorizationAction ->
+                    when (authorizationAction) {
+                        AuthorizationAction.EmptyFields -> showSnackbarCard(
+                            snackbarHostState = snackbarHostState,
+                            coroutineScope = coroutineScope,
+                            message = snackbarMessage
+                        )
+                        AuthorizationAction.BackPressed -> onNavigationPressed.invoke()
+                    }
                 }
             }
         }
@@ -231,7 +242,7 @@ private fun LoadingShimmer(
             AppBar(
                 backgroundColor = PlAntTokens.Background0.getThemedColor(),
                 navigationButton = AppBarNavigationButtons.Back,
-                navigationButtonClick = { viewModel.launchPreviousScreen() },
+                navigationButtonClick = { viewModel.onNavigationPressed() },
                 navigationButtonTint = PlAntTokens.Primary.getThemedColor()
             )
         }

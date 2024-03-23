@@ -3,6 +3,7 @@ package cdr.authorizationlib.presentation.registration
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cdr.authorizationlib.data.interactor.AuthorizationInteractor
 import cdr.authorizationlib.models.presentation.RegistrationAction
 import cdr.authorizationlib.models.presentation.RegistrationScreen
 import cdr.authorizationlib.models.presentation.RegistrationState
@@ -10,7 +11,7 @@ import cdr.authorizationlib.models.presentation.RoleChip
 import cdr.corecompose.chip.chipcard.ChipCardStyle
 import cdr.corecompose.textfield.TextFieldCardStyles
 import cdr.coreutilslib.logs.Logger
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -22,40 +23,54 @@ import kotlinx.coroutines.launch
 /**
  * [ViewModel] для экрана регистрации
  *
+ * @param authorizationInteractor интерактор для модуля авторизации
+ *
  * @author Alexandr Chekunkov
  */
-internal class RegistrationViewModel : ViewModel() {
+internal class RegistrationViewModel(
+    private val authorizationInteractor: AuthorizationInteractor
+) : ViewModel() {
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        Logger.e(TAG, "Ошибка доступа к удаленному сервису", exception)
+
+        currentData?.let { currentData ->
+            _state.value = RegistrationState.Screen(data = currentData.copy(isShowErrorAlert = true))
+        }
+    }
 
     /** Текущее состояние экрана */
     val state: StateFlow<RegistrationState> get() = _state.asStateFlow()
     private val _state = MutableStateFlow<RegistrationState>(RegistrationState.Screen())
+
+    /** Текущее данные, отображаемые на экране */
+    private var currentData: RegistrationScreen? = null
 
     /** Действие для показа snackbar на экране */
     val action: SharedFlow<RegistrationAction> get() = _action.asSharedFlow()
     private val _action = MutableSharedFlow<RegistrationAction>()
 
     /** Нажатие на кнопку навигации */
-    fun launchPreviousScreen() {
-        Logger.i(TAG, "--->>> back nav button clicked")
+    fun onNavigationPressed() = viewModelScope.launch {
+        _action.emit(RegistrationAction.BackPressed)
     }
 
     /** Нажатие на кнопку "Продолжить" на экране */
     fun signUp() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineExceptionHandler) {
             val currentState = _state.value
             if (currentState is RegistrationState.Screen) {
-                val currentData = currentState.data
+                currentData = currentState.data
 
-                if (checkIsNotBlank(currentData)) {
-                    if (checkIsSamePasswords(currentData)) {
-                        if (checkIsNotTinyPassword(currentData)) {
-                            if (checkIsNotEasyPassword(currentData)) {
-                                _state.value = RegistrationState.Loading
+                currentData?.let { currentData ->
+                    if (checkIsNotBlank(currentData)) {
+                        if (checkIsSamePasswords(currentData)) {
+                            if (checkIsNotTinyPassword(currentData)) {
+                                if (checkIsNotEasyPassword(currentData)) {
+                                    _state.value = RegistrationState.Loading
 
-                                // TODO: логика обращения к удаленному сервису с авторизацией
-                                delay(1350) // удалить после выполнения задачи
-
-                                _state.value = RegistrationState.Screen(data = currentData.copy(isShowErrorAlert = true))
+                                    authorizationInteractor.signUp()
+                                }
                             }
                         }
                     }
@@ -132,7 +147,7 @@ internal class RegistrationViewModel : ViewModel() {
 
     /** Проверка на сложность пароля */
     private suspend fun checkIsNotEasyPassword(currentData: RegistrationScreen): Boolean =
-        if (true) {
+        if (!currentData.firstPassword.text.text.matches(Regex(PASSWORD_REGEX))) {
             _state.value = RegistrationState.Screen(
                 data = currentData.copy(
                     firstPassword = currentData.firstPassword.copy(style = TextFieldCardStyles.Warning),
@@ -274,6 +289,7 @@ internal class RegistrationViewModel : ViewModel() {
         private const val TAG = "RegistrationViewModel"
         private const val MAX_CHARACTERS = 64
         private const val MIN_PASSWORD_SIZE = 8
+        private const val PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,64}\$"
 
         const val DEVELOPER_ID = 0
         const val QA_ID = 1

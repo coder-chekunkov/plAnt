@@ -89,6 +89,8 @@ internal enum class RoleChip {
  */
 internal sealed interface RegistrationAction {
 
+    /** Нажатие на кнопку навигации */
+    object BackPressed : RegistrationAction
 
     /** Отображение вспывающего окна с сообщением о незаполненных полях */
     object EmptyFields : RegistrationAction

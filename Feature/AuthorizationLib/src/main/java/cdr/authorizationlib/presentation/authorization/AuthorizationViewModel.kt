@@ -3,11 +3,13 @@ package cdr.authorizationlib.presentation.authorization
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import cdr.authorizationlib.data.interactor.AuthorizationInteractor
+import cdr.authorizationlib.models.presentation.AuthorizationAction
 import cdr.authorizationlib.models.presentation.AuthorizationScreen
 import cdr.authorizationlib.models.presentation.AuthorizationState
 import cdr.corecompose.textfield.TextFieldCardStyles
 import cdr.coreutilslib.logs.Logger
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,36 +21,51 @@ import kotlinx.coroutines.launch
 /**
  * [ViewModel] для экрана авторизации
  *
+ * @param authorizationInteractor интерактор для модуля авторизации
+ *
  * @author Alexandr Chekunkov
  */
-internal class AuthorizationViewModel : ViewModel() {
+internal class AuthorizationViewModel(
+    private val authorizationInteractor: AuthorizationInteractor
+) : ViewModel() {
+
+    private val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
+        Logger.e(TAG, "Ошибка доступа к удаленному сервису", exception)
+
+        currentData?.let { currentData ->
+            _state.value = AuthorizationState.Screen(data = currentData.copy(isShowErrorAlert = true))
+        }
+    }
 
     /** Текущее состояние экрана */
     val state: StateFlow<AuthorizationState> get() = _state.asStateFlow()
     private val _state = MutableStateFlow<AuthorizationState>(AuthorizationState.Screen())
 
+    /** Текущее данные, отображаемые на экране */
+    private var currentData: AuthorizationScreen? = null
+
     /** Действие для показа snackbar на экране */
-    val action: SharedFlow<Unit> get() = _action.asSharedFlow()
-    private val _action = MutableSharedFlow<Unit>()
+    val action: SharedFlow<AuthorizationAction> get() = _action.asSharedFlow()
+    private val _action = MutableSharedFlow<AuthorizationAction>()
 
     /** Нажатие на кнопку навигации */
-    fun launchPreviousScreen() {
-        Logger.i(TAG, "--->>> back nav button clicked")
+    fun onNavigationPressed() = viewModelScope.launch {
+        _action.emit(AuthorizationAction.BackPressed)
     }
 
     /** Нажатие на кнопку "Продолжить" на экране */
     fun signIn() {
-        viewModelScope.launch {
+        viewModelScope.launch(coroutineExceptionHandler) {
             val currentState = _state.value
             if (currentState is AuthorizationState.Screen) {
-                val currentData = currentState.data
+                currentData = currentState.data
 
-                if (checkIsNotBlank(currentData)) {
-                    _state.value = AuthorizationState.Loading
-                    // TODO: логика обращения к удаленному сервису с авторизацией
-                    delay(1350) // удалить после выполнения задачи
+                currentData?.let { currentData ->
+                    if (checkIsNotBlank(currentData)) {
+                        _state.value = AuthorizationState.Loading
 
-                    _state.value = AuthorizationState.Screen(data = currentData.copy(isShowErrorAlert = true))
+                        authorizationInteractor.signIn()
+                    }
                 }
             }
         }
@@ -70,7 +87,7 @@ internal class AuthorizationViewModel : ViewModel() {
                     )
                 )
             )
-            _action.emit(Unit)
+            _action.emit(AuthorizationAction.EmptyFields)
 
             false
         } else true
