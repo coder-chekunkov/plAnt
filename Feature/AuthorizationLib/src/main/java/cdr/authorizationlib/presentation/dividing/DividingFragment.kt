@@ -6,8 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.ui.platform.ComposeView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import cdr.authorizationlib.models.Navigator
+import cdr.authorizationlib.models.presentation.DividingAction
 import cdr.corecompose.theming.PlAntTheme
 import cdr.coreutilslib.utils.viewModelCreator
+import kotlinx.coroutines.launch
 
 /**
  * [Fragment] для разводящего экрана
@@ -23,6 +29,11 @@ internal class DividingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.action.collect(::initNavigator)
+            }
+        }
         return ComposeView(requireContext()).apply {
             setContent {
                 PlAntTheme {
@@ -30,5 +41,21 @@ internal class DividingFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun initNavigator(action: DividingAction) {
+        val navigator = requireActivity() as Navigator
+
+        when (action) {
+            DividingAction.LaunchAuthorizationScreen -> navigator.launchAuthorizationScreen()
+            DividingAction.LaunchRegistrationScreen -> navigator.launchRegistrationScreen()
+        }
+    }
+
+    companion object {
+        const val TAG = "DividingFragment"
+
+        /** Фабричный метод для создания [DividingFragment] */
+        fun newInstance(): DividingFragment = DividingFragment()
     }
 }

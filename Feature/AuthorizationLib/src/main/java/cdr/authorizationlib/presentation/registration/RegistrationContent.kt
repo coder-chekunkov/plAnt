@@ -60,18 +60,23 @@ import kotlinx.coroutines.withContext
  * Контент для экрана регистрации
  *
  * @param viewModel ViewModel для экрана регистрации
+ * @param onNavigationPressed действие по нажатию на навигационную кнопку
  *
  * @author Alexandr Chekunkov
  */
 @Composable
 internal fun RegistrationContent(
-    viewModel: RegistrationViewModel
+    viewModel: RegistrationViewModel,
+    onNavigationPressed: () -> Unit
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
 
     when (val currentState = state) {
-        is RegistrationState.Screen -> Screen(viewModel = viewModel, data = currentState.data)
         is RegistrationState.Loading -> LoadingShimmer(viewModel = viewModel)
+        is RegistrationState.Screen -> Screen(
+            viewModel = viewModel,
+            data = currentState.data,
+            onNavigationPressed = onNavigationPressed)
     }
 }
 
@@ -79,13 +84,16 @@ internal fun RegistrationContent(
  * Стандартное состояние экрана, с которым взаимодействует пользователь
  *
  * @param viewModel ViewModel для экрана авторизации
+ * @param data UI-модель, содержащая в себе данные на экране
+ * @param onNavigationPressed действие по нажатию на навигационную кнопку
  *
  * @author Alexandr Chekunkov
  */
 @Composable
 private fun Screen(
     viewModel: RegistrationViewModel,
-    data: RegistrationScreen
+    data: RegistrationScreen,
+    onNavigationPressed: () -> Unit
 ) {
     val coroutineScope = rememberCoroutineScope()
     val snackbarHostState = remember { SnackbarHostState() }
@@ -99,7 +107,7 @@ private fun Screen(
             AppBar(
                 backgroundColor = PlAntTokens.Background0.getThemedColor(),
                 navigationButton = AppBarNavigationButtons.Back,
-                navigationButtonClick = { viewModel.launchPreviousScreen() },
+                navigationButtonClick = { viewModel.onNavigationPressed() },
                 navigationButtonTint = PlAntTokens.Primary.getThemedColor()
             )
         },
@@ -243,6 +251,8 @@ private fun Screen(
                                 message = easyPasswordMessage
                             )
                         }
+
+                        RegistrationAction.BackPressed -> onNavigationPressed.invoke()
                     }
                 }
             }
@@ -295,7 +305,7 @@ private fun LoadingShimmer(
             AppBar(
                 backgroundColor = PlAntTokens.Background0.getThemedColor(),
                 navigationButton = AppBarNavigationButtons.Back,
-                navigationButtonClick = { viewModel.launchPreviousScreen() },
+                navigationButtonClick = { viewModel.onNavigationPressed() },
                 navigationButtonTint = PlAntTokens.Primary.getThemedColor()
             )
         }

@@ -1,7 +1,12 @@
 package cdr.authorizationlib.presentation.dividing
 
 import androidx.lifecycle.ViewModel
-import cdr.coreutilslib.logs.Logger
+import androidx.lifecycle.viewModelScope
+import cdr.authorizationlib.models.presentation.DividingAction
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.launch
 
 /**
  * [ViewModel] для разводящего экрана
@@ -10,18 +15,16 @@ import cdr.coreutilslib.logs.Logger
  */
 internal class DividingViewModel : ViewModel() {
 
+    val action: SharedFlow<DividingAction> get() = _action.asSharedFlow()
+    private val _action = MutableSharedFlow<DividingAction>()
 
     /** Запуск экрана авторизации */
-    fun launchAuthorizationScreen() {
-        Logger.i(TAG, "--->>> launch authorization button clicked")
+    fun launchAuthorizationScreen() = viewModelScope.launch {
+        _action.emit(DividingAction.LaunchAuthorizationScreen)
     }
 
     /** Запуск экрана регистрации */
-    fun launchRegistrationScreen() {
-        Logger.i(TAG, "--->>> launch registration button clicked")
-    }
-
-    companion object {
-        private const val TAG = "DividingViewModel"
+    fun launchRegistrationScreen() = viewModelScope.launch {
+        _action.emit(DividingAction.LaunchRegistrationScreen)
     }
 }

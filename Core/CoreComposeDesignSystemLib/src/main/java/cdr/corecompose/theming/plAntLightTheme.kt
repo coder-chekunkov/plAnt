@@ -19,7 +19,7 @@ internal fun lightTheme(): Map<PlAntTokens, Color> = mapOf(
     PlAntTokens.ChipNotSelectableText to Black0,
     PlAntTokens.ChipWarningText to Orange0,
     PlAntTokens.ChipNotSelectableBackground to Gray1,
-    PlAntTokens.ChipSelectableBackground to Gray3,
+    PlAntTokens.ChipSelectableBackground to Graphite0,
     PlAntTokens.ChipWarningBackground to Orange3,
     PlAntTokens.IconSecondary to Black1,
     PlAntTokens.TextPrimary to Black0,

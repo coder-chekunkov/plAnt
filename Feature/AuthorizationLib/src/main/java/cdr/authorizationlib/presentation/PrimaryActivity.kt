@@ -3,15 +3,14 @@ package cdr.authorizationlib.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import cdr.authorizationlib.presentation.authorization.AuthorizationContent
-import cdr.authorizationlib.presentation.authorization.AuthorizationViewModel
-import cdr.authorizationlib.presentation.dividing.DividingContent
-import cdr.authorizationlib.presentation.dividing.DividingViewModel
-import cdr.authorizationlib.presentation.registration.RegistrationContent
-import cdr.authorizationlib.presentation.registration.RegistrationViewModel
-import cdr.corecompose.theming.PlAntTheme
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.fragment.app.commit
+import cdr.authorizationlib.models.Navigator
+import cdr.authorizationlib.presentation.authorization.AuthorizationFragment
+import cdr.authorizationlib.presentation.dividing.DividingFragment
+import cdr.authorizationlib.presentation.registration.RegistrationFragment
+import cdr.coreutilslib.logs.Logger
 
 /**
  * Activity для модуля авторизации.
@@ -19,16 +18,47 @@ import cdr.corecompose.theming.PlAntTheme
  *
  * @author Alexandr Chekunkov
  */
-internal class PrimaryActivity : ComponentActivity() {
+internal class PrimaryActivity : FragmentActivity(), Navigator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            PlAntTheme {
-//                DividingContent(viewModel = DividingViewModel())
-//                AuthorizationContent(viewModel = AuthorizationViewModel())
-                RegistrationContent(viewModel = RegistrationViewModel())
-            }
+        setContentView(cdr.coreresourceslib.R.layout.primary_activity)
+
+        supportFragmentManager.commit {
+            replace(
+                cdr.coreresourceslib.R.id.primary_content_container,
+                DividingFragment.newInstance(),
+                DividingFragment.TAG
+            )
+        }
+    }
+
+    override fun launchAuthorizationScreen() = addFragment(
+        fragment = AuthorizationFragment.newInstance(),
+        tag = AuthorizationFragment.TAG
+    )
+
+    override fun launchRegistrationScreen() = addFragment(
+        fragment = RegistrationFragment.newInstance(),
+        tag = RegistrationFragment.TAG
+    )
+
+    override fun onNavigationPressed() {
+        Logger.d("onNavigationPressed", "pressed")
+        supportFragmentManager.popBackStack()
+    }
+
+    /** Запуск нового фрагмента */
+    private fun addFragment(
+        fragment: Fragment,
+        tag: String
+    ) {
+        supportFragmentManager.commit {
+            replace(
+                cdr.coreresourceslib.R.id.primary_content_container,
+                fragment,
+                tag
+            ).addToBackStack(null)
         }
     }
 

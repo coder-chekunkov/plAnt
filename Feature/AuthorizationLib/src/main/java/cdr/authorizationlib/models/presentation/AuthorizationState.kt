@@ -51,3 +51,17 @@ internal data class AuthorizationField(
     val subtitleVisibility: Boolean = false,
     val style: TextFieldCardStyles = TextFieldCardStyles.Standard
 )
+
+/**
+ * Экшены для экрана авторизации
+ *
+ * @author Alexandr Chekunkov
+ */
+internal sealed interface AuthorizationAction {
+
+    /** Нажатие на кнопку навигации */
+    object BackPressed : AuthorizationAction
+
+    /** Отображение вспывающего окна с сообщением о незаполненных полях */
+    object EmptyFields : AuthorizationAction
+}
