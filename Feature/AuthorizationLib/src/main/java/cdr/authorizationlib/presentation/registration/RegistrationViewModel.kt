@@ -88,7 +88,7 @@ internal class RegistrationViewModel(
         val blankSurname = currentData.surname.text.text.isBlank()
         val blankRole = currentData.roleChips.selectedChipRole == null
 
-        return if (blankLogin || blankFirstPassword || blankSecondPassword || blankName || blankSurname) {
+        return if (blankLogin || blankFirstPassword || blankSecondPassword || blankName || blankSurname || blankRole) {
             _state.value = RegistrationState.Screen(
                 data = currentData.copy(
                     login = currentData.login.copy(

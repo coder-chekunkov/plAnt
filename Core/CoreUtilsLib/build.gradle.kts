@@ -36,12 +36,11 @@ android {
 }
 
 dependencies {
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
-    debugImplementation("androidx.fragment:fragment-testing:1.6.2")
-
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    // dependencies for core module region
+    implementation(libs.kotlin.core)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.fragment)
+    implementation(libs.retrofit2)
+    implementation(libs.retrofit2.converter)
+    // end region
 }

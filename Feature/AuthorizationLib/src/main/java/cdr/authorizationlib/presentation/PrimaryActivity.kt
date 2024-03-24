@@ -10,7 +10,6 @@ import cdr.authorizationlib.models.Navigator
 import cdr.authorizationlib.presentation.authorization.AuthorizationFragment
 import cdr.authorizationlib.presentation.dividing.DividingFragment
 import cdr.authorizationlib.presentation.registration.RegistrationFragment
-import cdr.coreutilslib.logs.Logger
 
 /**
  * Activity для модуля авторизации.
@@ -43,23 +42,18 @@ internal class PrimaryActivity : FragmentActivity(), Navigator {
         tag = RegistrationFragment.TAG
     )
 
-    override fun onNavigationPressed() {
-        Logger.d("onNavigationPressed", "pressed")
-        supportFragmentManager.popBackStack()
-    }
+    override fun onNavigationPressed() = supportFragmentManager.popBackStack()
 
     /** Запуск нового фрагмента */
     private fun addFragment(
         fragment: Fragment,
         tag: String
-    ) {
-        supportFragmentManager.commit {
-            replace(
-                cdr.coreresourceslib.R.id.primary_content_container,
-                fragment,
-                tag
-            ).addToBackStack(null)
-        }
+    ) = supportFragmentManager.commit {
+        replace(
+            cdr.coreresourceslib.R.id.primary_content_container,
+            fragment,
+            tag
+        ).addToBackStack(null)
     }
 
     companion object {
