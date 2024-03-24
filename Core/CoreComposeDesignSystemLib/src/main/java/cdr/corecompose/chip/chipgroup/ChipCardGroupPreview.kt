@@ -13,7 +13,6 @@ import androidx.compose.ui.unit.dp
 import cdr.corecompose.appbar.AppBar
 import cdr.corecompose.chip.chipcard.ChipData
 import cdr.corecompose.text.Body2
-import cdr.corecompose.text.Body3
 import cdr.corecompose.theming.PlAntTokens
 import cdr.corecompose.theming.PreviewPlantTheme
 import cdr.corecompose.theming.getThemedColor
@@ -58,7 +57,7 @@ internal fun ChipCardGroupLightTheme() {
                     isSingleSelect = true,
                     onSelectedChips = { _ -> }
                 )
-                Body3(text = "Выбранные чипсы:")
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
 
                 Body2(modifier = Modifier.padding(vertical = 8.dp), text = "Множественный выбор")
@@ -68,7 +67,6 @@ internal fun ChipCardGroupLightTheme() {
                     isSingleSelect = false,
                     onSelectedChips = { _ -> }
                 )
-                Body3(text = "Выбранные чипсы: ")
             }
         }
     }
@@ -114,7 +112,7 @@ internal fun ChipCardGroupDarkTheme() {
                     isSingleSelect = true,
                     onSelectedChips = { _ -> }
                 )
-                Body3(text = "Выбранные чипсы:")
+
                 HorizontalDivider(modifier = Modifier.padding(vertical = 16.dp))
 
                 Body2(modifier = Modifier.padding(vertical = 8.dp), text = "Множественный выбор")
@@ -124,7 +122,6 @@ internal fun ChipCardGroupDarkTheme() {
                     isSingleSelect = false,
                     onSelectedChips = { _ -> }
                 )
-                Body3(text = "Выбранные чипсы: ")
             }
         }
     }

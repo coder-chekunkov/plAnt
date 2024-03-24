@@ -38,18 +38,16 @@ android {
 }
 
 dependencies {
+    // module dependencies region
     implementation(project(":Core:CoreResourcesLib"))
+    // end region
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
-    implementation("androidx.activity:activity-compose:1.8.2")
-    implementation(platform("androidx.compose:compose-bom:2024.02.02"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    // dependencies for core module region
+    implementation(libs.kotlin.core)
+    implementation(libs.androidx.lifecycle)
+    implementation(libs.androidx.lifecycle.compose)
+    implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material3)
+    debugImplementation(libs.androidx.compose.tooling)
+    // end region
 }
